@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * An implementation of the observable pattern for booleans. It was easier to
+ * An implementation of the observable pattern for any value. It was easier to
  * write this from scratch than try to use the java.util version.
  *
  * @author addonovan
@@ -24,11 +24,20 @@ public class Observable< T >
     // Constructors
     //
 
+    /**
+     * Initializes the observable with the backing value set to null.
+     */
     public Observable()
     {
         this( null );
     }
 
+    /**
+     * Initializes the observable with the given default value.
+     *
+     * @param defaultValue
+     *          The default value of the backing field.
+     */
     public Observable( T defaultValue )
     {
         value = defaultValue;
