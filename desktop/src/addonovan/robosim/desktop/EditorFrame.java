@@ -84,7 +84,7 @@ public class EditorFrame extends JFrame
 
             Simulation.runSpeed.attach( speed ->
             {
-                int newPos = ( int ) ( speed * 100 );
+                int newPos = ( int ) ( speed * 100f );
                 if ( sliderSpeed.getValue() == newPos ) return; // this prevents an endless cycle of calls
 
                 sliderSpeed.setValue( newPos );
@@ -132,6 +132,10 @@ public class EditorFrame extends JFrame
             panel.add( btnStop );
 
             sliderSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderSpeed.getValue() / 100f ) );
+            sliderSpeed.setMajorTickSpacing( 50 );
+            sliderSpeed.setMinorTickSpacing( 25 );
+            sliderSpeed.setPaintTicks( true );
+            sliderSpeed.setSnapToTicks( true );
             panel.add( sliderSpeed );
         }
         return panel;

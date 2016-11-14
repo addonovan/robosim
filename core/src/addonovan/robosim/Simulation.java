@@ -129,7 +129,7 @@ public final class Simulation
         // only update if we're running
         if ( running.getValue() && !paused.getValue() )
         {
-            float deltaTime = 1 / 60f;
+            float deltaTime = 1 / 60f * runSpeed.getValue();
 
             runtime.setValue( runtime.getValue() + deltaTime );
             loop.__call__();
