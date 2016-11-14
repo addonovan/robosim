@@ -144,11 +144,11 @@ public final class Simulation
             }
             if ( Gdx.input.isKeyPressed( Input.Keys.A ) )
             {
-                robot.rotate( 0.5f );
+                robot.rotate( 0.25f );
             }
             if ( Gdx.input.isKeyPressed( Input.Keys.D ) )
             {
-                robot.rotate( -0.5f );
+                robot.rotate( -0.25f );
             }
 
             world.step( deltaTime, 6, 2 );
