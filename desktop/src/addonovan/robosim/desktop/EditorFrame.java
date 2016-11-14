@@ -1,6 +1,8 @@
 package addonovan.robosim.desktop;
 
 import addonovan.robosim.Simulation;
+import jsyntaxpane.DefaultSyntaxKit;
+import jsyntaxpane.syntaxkits.PythonSyntaxKit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.*;
 public class EditorFrame extends JFrame
 {
 
-    private final JTextPane textEditor = new JTextPane();
+    private final JEditorPane textEditor = new JEditorPane();
 
     // General Panel
     private final JButton btnStart = new JButton( "Start" );
@@ -24,7 +26,7 @@ public class EditorFrame extends JFrame
     private final JButton btnStop = new JButton( "Stop" );
     private final JSlider sliderSpeed = new JSlider( 1, 500, 100 );
 
-    private final JLabel lblRuntime = new JLabel( "" );
+    private final JLabel lblRuntime = new JLabel( "Initializing..." );
 
     public EditorFrame()
     {
@@ -42,8 +44,12 @@ public class EditorFrame extends JFrame
         final JPanel generalControlPanel = makeGeneralControlsPanel();
         final JPanel simControlPanel = makeSimulationControlsPanel();
 
+        JScrollPane pane = new JScrollPane( textEditor );
+        DefaultSyntaxKit.initKit();
+        textEditor.setContentType( "text/python" );
         textEditor.setText( Simulation.EMPTY_PROGRAM );
-        add( BorderLayout.CENTER, textEditor );
+
+        add( BorderLayout.CENTER, pane );
         add( BorderLayout.SOUTH, lblRuntime );
 
         setSize( 450, 350 );
@@ -89,6 +95,8 @@ public class EditorFrame extends JFrame
 
                 sliderSpeed.setValue( newPos );
             } );
+
+            setVisible( true );
         } ).start();
     }
 

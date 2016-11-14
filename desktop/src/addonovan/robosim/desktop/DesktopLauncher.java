@@ -26,7 +26,6 @@ public class DesktopLauncher
         EditorFrame frame = new EditorFrame();
         frame.setSize( config.width, config.height - 25 );
         frame.setLocation( Display.getX() + config.width + 25, Display.getY() + 25 );
-        frame.setVisible( true );
     }
 
 }
