@@ -1,5 +1,7 @@
 package addonovan.robosim;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -7,6 +9,8 @@ import com.sun.istack.internal.NotNull;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -29,6 +33,8 @@ public final class Simulation
     /** The robot being simulated. */
     @NotNull public static Robot robot;
 
+    private static final List< Renderable > renderables = new ArrayList<>();
+
     /** The python interpreter in case access is needed. */
     @NotNull private static PythonInterpreter interpreter;
 
@@ -47,8 +53,8 @@ public final class Simulation
     /** The time the simulation has been running. (Measured in seconds). */
     public static Observable< Double > runtime = new Observable<>( 0.0 );
 
-    /** The callback used whenever the runtime is updated. */
-    @NotNull private static Consumer< Double > runtimeCallback;
+    /** The speed at which the simulation runs. */
+    public static Observable< Float > runSpeed = new Observable<>( 1f );
 
     /** The renderer used to draw new shapes and whatnot. */
     private static final ShapeRenderer shapeRenderer = new ShapeRenderer();
@@ -75,7 +81,6 @@ public final class Simulation
     public static void newInterpreter( String source )
     {
         PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.set( "robot", robot );
         interpreter.exec( source );
 
         loop = interpreter.get( "loop" );
@@ -92,8 +97,15 @@ public final class Simulation
         {
             world.dispose();
         }
-        world = new World( new Vector2( 0, 0 ), false );
+        world = new World( new Vector2( 0f, 0f ), false );
         robot = new Robot();
+        interpreter.set( "robot", robot );
+
+        renderables.clear();
+        renderables.add( new Wall(   2f, 144f,   8f,   8f ) );
+        renderables.add( new Wall( 144f,   2f,   8f,   8f ) );
+        renderables.add( new Wall(   2f, 146f, 152f,   8f ) );
+        renderables.add( new Wall( 146f,   2f,   8f, 152f ) );
 
         runtime.setValue( 0.0 );
         running.setValue( false );
@@ -106,6 +118,7 @@ public final class Simulation
     static void render()
     {
         robot.render();
+        renderables.forEach( Renderable::render );
     }
 
     /**
@@ -116,9 +129,29 @@ public final class Simulation
         // only update if we're running
         if ( running.getValue() && !paused.getValue() )
         {
-            runtime.setValue( runtime.getValue() + 1 / 60f );
-            world.step( 1 / 60f, 6, 2 );
+            float deltaTime = 1 / 60f;
+
+            runtime.setValue( runtime.getValue() + deltaTime );
             loop.__call__();
+
+            if ( Gdx.input.isKeyPressed( Input.Keys.W ) )
+            {
+                robot.move( 1f );
+            }
+            if ( Gdx.input.isKeyPressed( Input.Keys.S ) )
+            {
+                robot.move( -1f );
+            }
+            if ( Gdx.input.isKeyPressed( Input.Keys.A ) )
+            {
+                robot.rotate( 0.5f );
+            }
+            if ( Gdx.input.isKeyPressed( Input.Keys.D ) )
+            {
+                robot.rotate( -0.5f );
+            }
+
+            world.step( deltaTime, 6, 2 );
         }
     }
 

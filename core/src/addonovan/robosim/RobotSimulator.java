@@ -23,7 +23,7 @@ public class RobotSimulator extends ApplicationAdapter
     private Box2DDebugRenderer debugRenderer;
 
     /** The camera used for drawing. */
-    private Camera camera;
+    private OrthographicCamera camera;
 
     @Override
     public void create()
@@ -33,25 +33,32 @@ public class RobotSimulator extends ApplicationAdapter
         // set up the camera
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera( 30, 30 * ( width / height ) );
+        camera = new OrthographicCamera( Units.pxToM( width ), Units.pxToM( height ) );
         camera.position.set( camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f );
         camera.update();
 
         Simulation.initialize();
 
         debugRenderer = new Box2DDebugRenderer();
+
+        Gdx.gl.glEnable( GL11.GL_BLEND );
+        Gdx.gl.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
     }
 
     @Override
     public void render()
     {
-        Gdx.gl.glClear( GL11.GL_DEPTH_BUFFER_BIT );
-        Simulation.render();
-        Simulation.update();
+        Gdx.gl.glClear( GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_COLOR_BUFFER_BIT );
 
         if ( Gdx.input.isKeyPressed( Input.Keys.Q ) )
         {
             debugRenderer.render( Simulation.getWorld(), camera.combined );
         }
+        else
+        {
+            Simulation.render();
+        }
+
+        Simulation.update();
     }
 }

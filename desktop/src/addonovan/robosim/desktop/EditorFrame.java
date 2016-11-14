@@ -3,9 +3,7 @@ package addonovan.robosim.desktop;
 import addonovan.robosim.Simulation;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 
 /**
  * @author addonovan
@@ -17,11 +15,14 @@ public class EditorFrame extends JFrame
     private final JTextPane textEditor = new JTextPane();
 
     // General Panel
-    private final JButton btnRun = new JButton( "Run" );
+    private final JButton btnStart = new JButton( "Start" );
+    private final JButton btnReset = new JButton( "Reset" );
 
     // Simulation Control Panel
     private final JToggleButton btnTogglePause = new JToggleButton( "Pause" );
+    private final JButton btnRestart = new JButton( "Restart" );
     private final JButton btnStop = new JButton( "Stop" );
+    private final JSlider sliderSpeed = new JSlider( 1, 500, 100 );
 
     private final JLabel lblRuntime = new JLabel( "" );
 
@@ -80,40 +81,60 @@ public class EditorFrame extends JFrame
                     btnTogglePause.setSelected( false );
                 }
             } );
+
+            Simulation.runSpeed.attach( speed ->
+            {
+                int newPos = ( int ) ( speed * 100 );
+                if ( sliderSpeed.getValue() == newPos ) return; // this prevents an endless cycle of calls
+
+                sliderSpeed.setValue( newPos );
+            } );
         } ).start();
     }
 
     private JPanel makeGeneralControlsPanel()
     {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout( new BoxLayout( buttonPanel, BoxLayout.X_AXIS ) );
+        JPanel panel = new JPanel();
+        panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
         {
-            btnRun.addActionListener( e ->
+            btnStart.addActionListener( e ->
             {
-                Simulation.stop();
+                btnReset.doClick();
+                Simulation.start();
+            } );
+            panel.add( btnStart );
+
+            btnReset.addActionListener( e ->
+            {
                 Simulation.newInterpreter( textEditor.getText() );
                 Simulation.initialize();
-                Simulation.start();
-
-                btnTogglePause.setSelected( false );
             } );
-            buttonPanel.add( btnRun );
+            panel.add( btnReset );
         }
-        return buttonPanel;
+        return panel;
     }
 
     private JPanel makeSimulationControlsPanel()
     {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout( new BoxLayout( buttonPanel, BoxLayout.X_AXIS ) );
+        JPanel panel = new JPanel();
+        panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
         {
             btnTogglePause.addActionListener( e -> Simulation.togglePause() );
-            buttonPanel.add( btnTogglePause );
+            panel.add( btnTogglePause );
+
+            btnRestart.addActionListener( e -> {
+                btnStop.doClick();
+                btnStart.doClick();
+            } );
+            panel.add( btnRestart );
 
             btnStop.addActionListener( e -> Simulation.stop() );
-            buttonPanel.add( btnStop );
+            panel.add( btnStop );
+
+            sliderSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderSpeed.getValue() / 100f ) );
+            panel.add( sliderSpeed );
         }
-        return buttonPanel;
+        return panel;
     }
 
 }

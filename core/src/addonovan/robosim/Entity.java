@@ -8,18 +8,32 @@ import com.badlogic.gdx.physics.box2d.Body;
  * @author addonovan
  * @since 11/11/16
  */
-public abstract class Entity
+public abstract class Entity implements Renderable
 {
 
     //
-    // Constants
+    // Actions
     //
 
-    /** The scale for converting from simulation sizes to screen sizes. */
-    public static final float SIM_TO_SCREEN = 10f;
+    public float getMass()
+    {
+        return getBody().getMass();
+    }
 
-    /** The scale for converting from screen sizes to simulation sizes. */
-    public static final float SCREEN_TO_SIM = 1 / SIM_TO_SCREEN;
+    public float getX()
+    {
+        return getBody().getPosition().x;
+    }
+
+    public float getY()
+    {
+        return getBody().getPosition().y;
+    }
+
+    public float getAngle()
+    {
+        return getBody().getAngle();
+    }
 
     //
     // Abstract
@@ -29,7 +43,5 @@ public abstract class Entity
      * @return The body used by this entity in the simulation.
      */
     abstract Body getBody();
-
-    abstract void render();
 
 }
