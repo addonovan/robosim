@@ -1,13 +1,15 @@
 package addonovan.robosim;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author addonovan
  * @since 11/13/16
  */
-public class DistanceSensor implements Renderable
+public class DistanceSensor implements Sensor
 {
 
     /** The maximum distance away the distance sensor can detect things [m]. */
@@ -28,6 +30,9 @@ public class DistanceSensor implements Renderable
 
     /** The angle of the sensor when attached. */
     private final float angle;
+
+    /** The distance currently being read by the sensor. */
+    private float distance;
 
     //
     // Constructors
@@ -59,11 +64,11 @@ public class DistanceSensor implements Renderable
 
     public float getDistance()
     {
-        return 0f;
+        return distance;
     }
 
     //
-    // Rendering
+    // Overrides
     //
 
     @Override
@@ -72,7 +77,12 @@ public class DistanceSensor implements Renderable
         Simulation.renderShape( ShapeRenderer.ShapeType.Line, sr ->
         {
 
-            float alpha = ( 0.7f ) * ( getDistance() / MAX_DISTANCE ) + 0.3f;
+            float alpha = 0.15f;
+            if ( distance > 0.001f )
+            {
+                alpha = ( 0.7f ) * ( distance / MAX_DISTANCE ) + 0.3f;
+            }
+
             sr.setColor( new Color( 1, 1, 0, alpha ) );
 
             float drawX = Units.mToPx( robot.getX() );
@@ -95,6 +105,38 @@ public class DistanceSensor implements Renderable
             sr.rotate( 0, 0, 1, -rotation );
             sr.translate( -drawX, -drawY, 0 );
         } );
+    }
+
+    public void update()
+    {
+        float robotAngle = robot.getAngle();
+
+        Vector2 robotPosition = robot.getBody().getPosition();
+
+        // god, this took far too long to get worked out.
+        float magnitude = ( float ) Math.sqrt( ( x * x ) + ( y * y ) );
+        float localAngle = ( float ) Math.atan2( y, x );
+
+        float x = magnitude * ( float ) Math.cos( robotAngle + localAngle );
+        float y = magnitude * ( float ) Math.sin( robotAngle + localAngle );
+
+        Vector2 start = robotPosition.add( x, y );
+
+        Vector2 end = new Vector2( start );
+        end.x += MAX_DISTANCE * ( float ) Math.cos( angle + robotAngle );
+        end.y += MAX_DISTANCE * ( float ) Math.sin( angle + robotAngle );
+
+        distance = 0f;
+        Simulation.getWorld().rayCast( ( fixture, point, normal, fraction ) ->
+        {
+            if ( fraction > 1f ) return -1f;
+            else
+            {
+                distance = ( 1 - fraction ) * MAX_DISTANCE;
+                return 0f;
+            }
+        }, start, end );
+
     }
 
 }

@@ -1,5 +1,7 @@
 package addonovan.robosim;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * @author addonovan
  * @since 11/13/16
@@ -35,6 +37,11 @@ public final class Units
     public static float mToPx( float meters )
     {
         return meters / PIXELS_TO_METERS;
+    }
+
+    public static Vector2 mToPx( Vector2 input )
+    {
+        return new Vector2( mToPx( input.x ), mToPx( input.y ) );
     }
 
     public static float inToM( float inches )

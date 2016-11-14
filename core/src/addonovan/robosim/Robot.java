@@ -39,7 +39,8 @@ public class Robot extends Entity
     /** The body this uses in the physics simulations. */
     private final Body body;
 
-    private final List< Renderable > sensors = new ArrayList<>();
+    /** The sensors in this robot. */
+    private final List< Sensor > sensors = new ArrayList<>();
 
     //
     // Constructors
@@ -73,7 +74,8 @@ public class Robot extends Entity
             sr.rect( x, y, WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 1, 1, ( float ) Math.toDegrees( body.getAngle() ) );
         } );
 
-        sensors.forEach( Renderable::render );
+        sensors.forEach( Sensor::update );
+        sensors.forEach( Sensor::render );
     }
 
     //
