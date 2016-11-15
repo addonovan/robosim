@@ -12,7 +12,7 @@ public class DistanceSensor implements Sensor
 {
 
     /** The maximum distance away the distance sensor can detect things [m]. */
-    public static final float MAX_DISTANCE = 0.255f;
+    public static final float MAX_DISTANCE = 2.55f;
 
     //
     // Fields
@@ -98,12 +98,6 @@ public class DistanceSensor implements Sensor
     {
         Vector2 start = getStartPosition();
         Vector2 end = getEndPosition( start );
-
-        Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
-        {
-            sr.setColor( Color.GREEN );
-            sr.circle( Units.mToPx( start.x ), Units.mToPx( start.y ), 2 );
-        } );
 
         distance = 0f;
         Simulation.getWorld().rayCast( ( fixture, point, normal, fraction ) ->

@@ -7,6 +7,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.lwjgl.opengl.Display;
 
 /**
+ * This launches the desktop application.
+ *
  * @author addonovan
  * @since 11/10/16
  */
