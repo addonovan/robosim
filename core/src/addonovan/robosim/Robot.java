@@ -116,8 +116,49 @@ public class Robot extends Entity
     }
 
     //
-    // Jython Bindings
+    // Actions
     //
+
+    public Sensor getSensor( int i )
+    {
+        return sensors.get( i );
+    }
+
+    public void powerMotor( float power, String motorName )
+    {
+        // the center of the robot
+        float x = getX();
+        float y = getY();
+
+        // shift over to the correct side
+        if ( motorName.contains( "left" ) ) // we're on the LEFT
+        {
+            x -= WIDTH * ( float ) Math.cos( getAngle() );
+        }
+        else
+        {
+            x += WIDTH * ( float ) Math.cos( getAngle() );
+        }
+
+        // shift up or down
+        if ( motorName.contains( "front" ) ) // we're at the FRONT
+        {
+            y += HEIGHT * ( float ) Math.sin( getAngle() );
+        }
+        else
+        {
+            y -= HEIGHT * ( float ) Math.sin( getAngle() );
+        }
+
+        // NeveRest 40 scaled to power
+        float force = 40 * power;
+
+        float force_x = force * ( float ) Math.cos( getAngle() );
+        float force_y = force * ( float ) Math.sin( getAngle() );
+
+        // apply the force from one motor on there
+        body.applyForce( force_x, force_y, x, y, true );
+    }
 
     public void move( float power )
     {
@@ -126,8 +167,8 @@ public class Robot extends Entity
             throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
         }
 
-        // 2x NeveRest 40s (each output about 175 oz of force with a 4 inch wheel)
-        float force = 80 * power;
+        // 4x NeveRest 40 scaled to power
+        float force = 160 * power;
 
         float force_x = force * ( float ) Math.cos( getAngle() );
         float force_y = force * ( float ) Math.sin( getAngle() );

@@ -30,15 +30,6 @@ public class EditorFrame extends JFrame
 
     public EditorFrame()
     {
-        try
-        {
-            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-        }
-
         setLayout( new BorderLayout() );
 
         final JPanel generalControlPanel = makeGeneralControlsPanel();
@@ -110,6 +101,7 @@ public class EditorFrame extends JFrame
                 btnReset.doClick();
                 Simulation.start();
             } );
+            btnStart.setContentAreaFilled( false );
             panel.add( btnStart );
 
             btnReset.addActionListener( e ->
@@ -117,6 +109,7 @@ public class EditorFrame extends JFrame
                 Simulation.newInterpreter( textEditor.getText() );
                 Simulation.initialize();
             } );
+            btnReset.setContentAreaFilled( false );
             panel.add( btnReset );
         }
         return panel;
@@ -128,15 +121,18 @@ public class EditorFrame extends JFrame
         panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
         {
             btnTogglePause.addActionListener( e -> Simulation.togglePause() );
+            btnTogglePause.setContentAreaFilled( false );
             panel.add( btnTogglePause );
 
             btnRestart.addActionListener( e -> {
                 btnStop.doClick();
                 btnStart.doClick();
             } );
+            btnRestart.setContentAreaFilled( false );
             panel.add( btnRestart );
 
             btnStop.addActionListener( e -> Simulation.stop() );
+            btnStop.setContentAreaFilled( false );
             panel.add( btnStop );
 
             sliderSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderSpeed.getValue() / 100f ) );

@@ -24,7 +24,10 @@ public final class Simulation
     // Constants
     //
 
-    public static final String EMPTY_PROGRAM = "def loop():\n    return";
+    public static final String EMPTY_PROGRAM = "def loop(self):\n    pass";
+
+    /** The layout for the program. */
+    private static final String PROGRAM_LAYOUT = Gdx.files.internal( "PyRobot.py" ).readString();
 
     //
     // Fields
@@ -81,9 +84,11 @@ public final class Simulation
     public static void newInterpreter( String source )
     {
         PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.exec( source );
 
-        loop = interpreter.get( "loop" );
+        String modifiedSource = PROGRAM_LAYOUT + "\n";
+        modifiedSource += "    " + source.replaceAll( "\n", "\n    " );
+        interpreter.exec( modifiedSource );
+
         Simulation.interpreter = interpreter;
     }
 
@@ -100,6 +105,8 @@ public final class Simulation
         world = new World( new Vector2( 0f, 0f ), false );
         robot = new Robot();
         interpreter.set( "robot", robot );
+        interpreter.exec( "pyRobot = PyRobot(robot)" );
+        loop = interpreter.get( "pyRobot" ).__getattr__( "loop" );
 
         renderables.clear();
         renderables.add( new Wall(   2f, 144f,   8f,   8f ) );
@@ -132,7 +139,14 @@ public final class Simulation
             float deltaTime = 1 / 60f * runSpeed.getValue();
 
             runtime.setValue( runtime.getValue() + deltaTime );
-            loop.__call__();
+            try
+            {
+                loop.__call__();
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+            }
 
             if ( Gdx.input.isKeyPressed( Input.Keys.W ) )
             {
