@@ -123,6 +123,18 @@ public class SimulationWindow implements WindowListener
 
     public static void main( String[] args )
     {
+        try
+        {
+            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
+
+        // force this to be #FAFAFA, regardless of system theme
+        UIManager.getLookAndFeelDefaults().put( "EditorPane.background", new Color( 250, 250, 250 ) );
+
         SwingUtilities.invokeLater( () ->
         {
             JFrame frame = new JFrame( "Robot Simulator" );
