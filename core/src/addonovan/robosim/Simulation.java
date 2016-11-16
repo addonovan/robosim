@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.sun.istack.internal.NotNull;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;

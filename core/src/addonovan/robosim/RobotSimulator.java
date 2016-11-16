@@ -26,6 +26,7 @@ public class RobotSimulator extends ApplicationAdapter
     @Override
     public void create()
     {
+        Gdx.app.log( "RobotSimulator", "Initializing Box2D" );
         Box2D.init(); // DON'T forget this lol
 
         // set up the camera
@@ -35,7 +36,9 @@ public class RobotSimulator extends ApplicationAdapter
         camera.position.set( camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f );
         camera.update();
 
+        Gdx.app.log( "RobotSimulator", "Initializing the simulation..." );
         Simulation.initialize();
+        Gdx.app.log( "RobotSimulator", "Simulation initialized" );
 
         debugRenderer = new Box2DDebugRenderer();
 
