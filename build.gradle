@@ -26,6 +26,10 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
@@ -37,6 +41,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+        compile "org.lwjgl.lwjgl:lwjgl:2.9.2"
+        compile "de.sciss:jsyntaxpane:1.0.0"
     }
 }
 
@@ -46,6 +52,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile name: 'jython_2.7.0'
     }
 }
 
