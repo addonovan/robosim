@@ -32,6 +32,10 @@ public class Robot extends Entity
     /** The height of all robots. [px] */
     static final float HEIGHT = Units.inToPx( 18f );
 
+    static final float WIDTH_M = Units.pxToM( WIDTH );
+
+    static final float HEIGHT_M = Units.pxToM( HEIGHT );
+
     //
     // Fields
     //
@@ -72,6 +76,21 @@ public class Robot extends Entity
             float y = bodyY - ( WIDTH / 2 );
 
             sr.rect( x, y, WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 1, 1, ( float ) Math.toDegrees( body.getAngle() ) );
+        } );
+
+        Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
+        {
+            sr.setColor( Color.GREEN );
+
+            float x = Units.mToPx( getX() );
+            float y = Units.mToPx( getY() );
+            float xOffset = Units.mToPx( getMotorOffsetX() );
+            float yOffset = Units.mToPx( getMotorOffsetY() );
+
+            sr.circle( x + xOffset, y + yOffset, 2 );
+            sr.circle( x - xOffset, y + yOffset, 2 );
+            sr.circle( x - xOffset, y - yOffset, 2 );
+            sr.circle( x + xOffset, y - yOffset, 2 );
         } );
 
         sensors.forEach( Sensor::update );
@@ -124,31 +143,24 @@ public class Robot extends Entity
         return sensors.get( i );
     }
 
+    private float getMotorOffsetX()
+    {
+        return 0.45f * WIDTH_M * ( float ) Math.sin( getAngle() );
+    }
+
+    private float getMotorOffsetY()
+    {
+        return 0.40f * HEIGHT_M * ( float ) Math.sin( getAngle() );
+    }
+
     public void powerMotor( float power, String motorName )
     {
+        boolean onLeft = motorName.contains( "left" );
+        boolean onFront = motorName.contains( "front" );
+
         // the center of the robot
-        float x = getX();
-        float y = getY();
-
-        // shift over to the correct side
-        if ( motorName.contains( "left" ) ) // we're on the LEFT
-        {
-            x -= WIDTH * ( float ) Math.cos( getAngle() );
-        }
-        else
-        {
-            x += WIDTH * ( float ) Math.cos( getAngle() );
-        }
-
-        // shift up or down
-        if ( motorName.contains( "front" ) ) // we're at the FRONT
-        {
-            y += HEIGHT * ( float ) Math.sin( getAngle() );
-        }
-        else
-        {
-            y -= HEIGHT * ( float ) Math.sin( getAngle() );
-        }
+        float x = getX() + ( onLeft ? -1 : 1 ) * getMotorOffsetX();
+        float y = getY() + ( onFront ? 1 : -1 ) * getMotorOffsetY();
 
         // NeveRest 40 scaled to power
         float force = 40 * power;
