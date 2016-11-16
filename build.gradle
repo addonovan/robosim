@@ -6,7 +6,6 @@ buildscript {
         jcenter()
     }
 }
-apply plugin: 'kotlin'
 
 allprojects {
     apply plugin: "eclipse"
