@@ -21,38 +21,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-from addonovan.robosim import *
 
-class Motor:
+edge = False
 
-    def __init__(self, robot, id):
-        self.robot = robot
-        self.id = id
+def move(self, power):
+    if abs( power ) <= 0.1:
+        if power > 0:
+            power = 0.1
+        else:
+            power = -0.1
 
-    def set_power(self, power):
-        self.robot.powerMotor( power, self.id )
+    self.mtr_fl.set_power(power)
+    self.mtr_fr.set_power(power)
+    self.mtr_bl.set_power(power)
+    self.mtr_br.set_power(power)
 
-class DistanceSensor:
+def loop(self):
+    distance = self.sensor_distance.get_distance()
 
-    def __init__(self, sensor):
-        self.sensor = sensor
+    if distance < 0.20 and distance != -1:
+        self.edge = True
 
-    def get_distance(self):
-        return self.sensor.getDistance()
+    if self.edge and distance == -1:
+        self.edge = False
 
+    power = ( distance / 2.55 )
+    if power == -1 / 2.55:
+        power = 1
 
-class PyRobot:
-
-    def __init__(self, robot):
-        self.robot = robot
-
-        # create the motors
-        self.mtr_fl = Motor(robot, "front_left")
-        self.mtr_fr = Motor(robot, "front_right")
-        self.mtr_bl = Motor(robot, "back_left")
-        self.mtr_br = Motor(robot, "back_right")
-
-        self.sensor_distance   = DistanceSensor(robot.getSensor(0))
+    if self.edge:
+        power *= -1
 
 
-    # INSERT def loop(): here
+    self.move( power )

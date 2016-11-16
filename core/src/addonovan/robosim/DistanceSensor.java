@@ -99,13 +99,14 @@ public class DistanceSensor implements Sensor
         Vector2 start = getStartPosition();
         Vector2 end = getEndPosition( start );
 
-        distance = 0f;
+        distance = -1f;
         Simulation.getWorld().rayCast( ( fixture, point, normal, fraction ) ->
         {
             if ( fraction > 1f ) return -1f;
             else
             {
-                distance = ( 1 - fraction ) * MAX_DISTANCE;
+                float newDistance = fraction * MAX_DISTANCE;
+                distance = Math.max( distance, newDistance );
                 return 0f;
             }
         }, start, end );
