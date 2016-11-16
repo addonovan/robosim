@@ -71,8 +71,9 @@ public class SimulationWindow implements WindowListener
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = config.height = size;
         config.title = "Robot Simulator";
-        LwjglAWTCanvas lwjglCanvas = new LwjglAWTCanvas( new RobotSimulator(), config );
+        config.vSyncEnabled = true;
 
+        LwjglAWTCanvas lwjglCanvas = new LwjglAWTCanvas( new RobotSimulator(), config );
         simulationPanel.add( lwjglCanvas.getCanvas(), BorderLayout.CENTER );
     }
 

@@ -107,6 +107,8 @@ public final class Simulation
         runtime.setValue( 0.0 );
         running.setValue( false );
         paused.setValue( false );
+
+        Gdx.app.log( "Simulation", "Initialized" );
     }
 
     /**
@@ -186,11 +188,6 @@ public final class Simulation
     public static void stop()
     {
         running.setValue( false );
-    }
-
-    public static void togglePause()
-    {
-        paused.setValue( !paused.getValue() );
     }
 
     static World getWorld()
