@@ -59,16 +59,7 @@ public final class Simulation
     public static Observable< Double > runSpeed = new Observable<>( 1.0 );
 
     /** The renderer used to draw new shapes and whatnot. */
-    private static final ShapeRenderer shapeRenderer = new ShapeRenderer();
-
-    //
-    // Constructors
-    //
-
-    static
-    {
-        newInterpreter( EMPTY_PROGRAM );
-    }
+    static ShapeRenderer shapeRenderer;
 
     //
     // Actions

@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import org.lwjgl.opengl.GL11;
@@ -37,7 +38,9 @@ public class RobotSimulator extends ApplicationAdapter
         camera.update();
 
         Gdx.app.log( "RobotSimulator", "Initializing the simulation..." );
+        Simulation.newInterpreter( Simulation.EMPTY_PROGRAM );
         Simulation.initialize();
+        Simulation.shapeRenderer = new ShapeRenderer();
         Gdx.app.log( "RobotSimulator", "Simulation initialized" );
 
         debugRenderer = new Box2DDebugRenderer();

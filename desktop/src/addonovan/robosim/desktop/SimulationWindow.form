@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="addonovan.robosim.desktop.SimulationWindow">
-  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
-      <xy x="20" y="20" width="616" height="400"/>
+      <xy x="20" y="20" width="616" height="441"/>
     </constraints>
     <properties/>
     <border type="line">
@@ -12,8 +12,8 @@
     <children>
       <grid id="f778d" binding="simulationPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="0" height="199"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="0" height="227"/>
           </grid>
         </constraints>
         <properties/>
@@ -28,7 +28,7 @@
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:246px:grow"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="line" title="Simulation Controls"/>
@@ -58,60 +58,59 @@
               <text value="Run speed"/>
             </properties>
           </component>
-          <grid id="54240" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="54240" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <forms/>
+              <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-vert="false"/>
             </constraints>
             <properties/>
             <border type="line">
               <color color="-16777216"/>
             </border>
             <children>
-              <component id="a7b1a" class="javax.swing.JCheckBox" binding="runningCheckBox" default-binding="true">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Running"/>
-                </properties>
-              </component>
-              <component id="366fb" class="javax.swing.JCheckBox" binding="pausedCheckBox" default-binding="true">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Paused"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="6be8f" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="a242d" class="javax.swing.JButton" binding="resetButton" default-binding="true">
+              <component id="7b3f7" class="javax.swing.JButton" binding="startButton" default-binding="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Reset"/>
-                  <toolTipText value="Place the robot at its initial position and reset the time"/>
+                  <text value="Start"/>
                 </properties>
               </component>
-              <component id="571e3" class="javax.swing.JButton" binding="restartButton" default-binding="true">
+              <hspacer id="47dcc">
+                <constraints>
+                  <grid row="0" column="3" row-span="3" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="c86b5" class="javax.swing.JButton" binding="stopButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Stop"/>
+                </properties>
+              </component>
+              <vspacer id="47eb9">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="82c2e" class="javax.swing.JButton" binding="restartButton" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <enabled value="false"/>
                   <text value="Restart"/>
-                  <toolTipText value="Stop, reset, and start the simulation with the current script"/>
+                </properties>
+              </component>
+              <component id="8849d" class="javax.swing.JButton" binding="resetButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Reset"/>
                 </properties>
               </component>
             </children>
@@ -120,7 +119,7 @@
       </grid>
       <tabbedpane id="65239" default-binding="true">
         <constraints>
-          <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="1" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="500" height="200"/>
           </grid>
         </constraints>
@@ -135,20 +134,33 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="85648" class="javax.swing.JEditorPane" binding="editorPane">
+              <scrollpane id="dab96">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="85648" class="javax.swing.JEditorPane" binding="editorPane">
+                    <constraints/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
         </children>
       </tabbedpane>
+      <component id="f70df" class="javax.swing.JLabel" binding="lblRuntime">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Initializing..."/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
