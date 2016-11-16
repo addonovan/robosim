@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * A sensor which detects any objects within a certain distance.
+ *
+ * This sensor will draw a straight line in the angle it's pointed which
+ * will become more bright the closer an object is to it.
+ *
  * @author addonovan
  * @since 11/13/16
  */
@@ -49,7 +54,7 @@ public class DistanceSensor implements Sensor
      * @param angle
      *          The angle of the sensor (relative to the robot) [°].
      */
-    public DistanceSensor( Robot robot, float x, float y, float angle )
+    DistanceSensor( Robot robot, float x, float y, float angle )
     {
         x = Units.inToM( x );
         y = Units.inToM( y );

@@ -38,7 +38,7 @@ public class Observable< T >
      * @param defaultValue
      *          The default value of the backing field.
      */
-    public Observable( T defaultValue )
+    Observable( T defaultValue )
     {
         value = defaultValue;
     }
@@ -61,7 +61,7 @@ public class Observable< T >
     /**
      * Dispatches all the listeners as if there was a state change.
      */
-    public void dispatchListeners()
+    private void dispatchListeners()
     {
         observers.forEach( booleanConsumer -> booleanConsumer.accept( value ) );
     }

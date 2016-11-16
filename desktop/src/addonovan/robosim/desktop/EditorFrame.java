@@ -135,7 +135,7 @@ public class EditorFrame extends JFrame
             btnStop.setContentAreaFilled( false );
             panel.add( btnStop );
 
-            sliderSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderSpeed.getValue() / 100f ) );
+            sliderSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderSpeed.getValue() / 100.0 ) );
             sliderSpeed.setMajorTickSpacing( 50 );
             sliderSpeed.setMinorTickSpacing( 25 );
             sliderSpeed.setPaintTicks( true );

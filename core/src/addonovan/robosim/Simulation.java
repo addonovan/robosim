@@ -34,7 +34,7 @@ public final class Simulation
     //
 
     /** The robot being simulated. */
-    @NotNull public static Robot robot;
+    @NotNull private static Robot robot;
 
     private static final List< Renderable > renderables = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public final class Simulation
     public static Observable< Double > runtime = new Observable<>( 0.0 );
 
     /** The speed at which the simulation runs. */
-    public static Observable< Float > runSpeed = new Observable<>( 1f );
+    public static Observable< Double > runSpeed = new Observable<>( 1.0 );
 
     /** The renderer used to draw new shapes and whatnot. */
     private static final ShapeRenderer shapeRenderer = new ShapeRenderer();
@@ -136,7 +136,7 @@ public final class Simulation
         // only update if we're running
         if ( running.getValue() && !paused.getValue() )
         {
-            float deltaTime = 1 / 60f * runSpeed.getValue();
+            float deltaTime = 1 / 60f * runSpeed.getValue().floatValue();
 
             runtime.setValue( runtime.getValue() + deltaTime );
             try
@@ -203,7 +203,7 @@ public final class Simulation
         paused.setValue( !paused.getValue() );
     }
 
-    public static World getWorld()
+    static World getWorld()
     {
         return world;
     }

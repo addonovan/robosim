@@ -27,14 +27,14 @@ public class Robot extends Entity
     //
 
     /** The width of all robots. [px] */
-    static final float WIDTH = Units.inToPx( 18f );
+    private static final float WIDTH = Units.inToPx( 18f );
 
     /** The height of all robots. [px] */
-    static final float HEIGHT = Units.inToPx( 18f );
+    private static final float HEIGHT = Units.inToPx( 18f );
 
-    static final float WIDTH_M = Units.pxToM( WIDTH );
+    private static final float WIDTH_M = Units.pxToM( WIDTH );
 
-    static final float HEIGHT_M = Units.pxToM( HEIGHT );
+    private static final float HEIGHT_M = Units.pxToM( HEIGHT );
 
     //
     // Fields
@@ -50,7 +50,7 @@ public class Robot extends Entity
     // Constructors
     //
 
-    public Robot()
+    Robot()
     {
         body = makeBody();
         body.setTransform( Units.inToM( 11 ) + Units.pxToM( WIDTH / 2 ), Units.inToM( 11 ) + Units.pxToM( HEIGHT / 2 ), 0f );
@@ -172,7 +172,7 @@ public class Robot extends Entity
         body.applyForce( force_x, force_y, x, y, true );
     }
 
-    public void move( float power )
+    void move( float power )
     {
         if ( power < -1f || power > 1f )
         {
@@ -188,7 +188,7 @@ public class Robot extends Entity
         body.applyForceToCenter( force_x, force_y, true );
     }
 
-    public void rotate( float power )
+    void rotate( float power )
     {
         if ( power < -1f  || power > 1f )
         {

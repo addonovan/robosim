@@ -21,7 +21,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-from addonovan.robosim import *
+from addonovan.robosim import Simulation
+
+def set_run_speed(speed):
+    if speed < 0.01:
+        speed = 0.01
+    elif speed > 5:
+        speed = 5
+
+    Simulation.runSpeed.setValue( speed )
 
 class Motor:
 
