@@ -78,4 +78,38 @@ public final class Math
         return sqrt( x * x + y * y );
     }
 
+    /**
+     * Creates a vector from the given magnitude and angle.
+     *
+     * @param magnitude
+     *          The magnitude (length) of the vector.
+     * @param angle
+     *          The angle of the vector.
+     * @return The vector representing the given inputs.
+     */
+    public static Vector2 vectorFrom( float magnitude, float angle )
+    {
+        Vector2 v = new Vector2( 1f, 1f );
+        v.setLength( magnitude );
+        v.setAngleRad( angle );
+        return v;
+    }
+
+    /**
+     * Creates a vector with the given input x and y components (which
+     * will be converted into a magnitude) and angle.
+     *
+     * @param x
+     *          The x component of the magnitude.
+     * @param y
+     *          The y component of the magnitude.
+     * @param angle
+     *          The angle (radians) of the vector.
+     * @return The vector created by this.
+     */
+    public static Vector2 vectorFrom( float x, float y, float angle )
+    {
+        return vectorFrom( magnitude( x, y ), angle );
+    }
+
 }

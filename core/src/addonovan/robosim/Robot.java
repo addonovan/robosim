@@ -63,8 +63,6 @@ public class Robot extends Entity
     // Rendering
     //
 
-    private float angle = 0f;
-
     @Override
     public void render()
     {
@@ -147,12 +145,7 @@ public class Robot extends Entity
 
     private Vector2 getMotorPosition( float angle )
     {
-        float mag = 0.40f * Math.magnitude( WIDTH_M, HEIGHT_M );
-
-        float x = mag * Math.cos( angle + getAngle() );
-        float y = mag * Math.sin( angle + getAngle() );
-
-        return new Vector2( x, y ).add( getX(), getY() );
+        return Math.vectorFrom( 0.40f * WIDTH_M, 0.40f * HEIGHT_M, angle ).add( getX(), getY() );
     }
 
     public void powerMotor( float power, String motorName )
@@ -164,8 +157,6 @@ public class Robot extends Entity
 
         if ( !onFront ) angle *= 3f;
         if ( !onLeft ) angle *= -1f;
-
-        Vector2 position = getBody().getPosition();
 
         // NeveRest 40 scaled to power
         Vector2 force = new Vector2( 1f, 1f );
@@ -183,13 +174,7 @@ public class Robot extends Entity
             throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
         }
 
-        // 4x NeveRest 40 scaled to power
-        float force = 160 * power;
-
-        float force_x = force * Math.cos( getAngle() );
-        float force_y = force * Math.sin( getAngle() );
-
-        body.applyForceToCenter( force_x, force_y, true );
+        body.applyForceToCenter( Math.vectorFrom( 160f * power, getAngle() ), true );
     }
 
     void rotate( float power )
