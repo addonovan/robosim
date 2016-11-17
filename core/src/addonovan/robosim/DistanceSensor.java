@@ -135,22 +135,12 @@ public class DistanceSensor implements Sensor
 
     private Vector2 getStartPosition()
     {
-        float robotAngle = robot.getAngle();
-        float x = positionVector.len() * Math.cos( robotAngle + positionVector.angle() );
-        float y = positionVector.len() * Math.sin( robotAngle + positionVector.angle() );
-
-        return robot.getBody().getPosition().add( x, y );
+        return Math.vectorFrom( positionVector.len(), robot.getAngle() + positionVector.angle() ).add( robot.getX(), robot.getY() );
     }
 
     private Vector2 getEndPosition( Vector2 start )
     {
-        float robotAngle = robot.getAngle();
-
-        Vector2 end = new Vector2( start );
-        end.x += MAX_DISTANCE * Math.cos( angle + robotAngle );
-        end.y += MAX_DISTANCE * Math.sin( angle + robotAngle );
-
-        return end;
+        return Math.vectorFrom( MAX_DISTANCE, angle + robot.getAngle() ).add( start.x, start.y );
     }
 
 }
