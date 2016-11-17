@@ -26,9 +26,7 @@ package addonovan.robosim;
  * @author addonovan
  * @since 11/13/16
  */
-public interface Sensor extends Renderable
+public interface Sensor extends HardwareDevice
 {
-
-    void update();
 
 }

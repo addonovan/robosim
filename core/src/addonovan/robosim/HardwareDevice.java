@@ -20,63 +20,15 @@
 
 package addonovan.robosim;
 
-import com.badlogic.gdx.math.Vector2;
-
 /**
+ * A hardware device of some type.
+ *
  * @author addonovan
- * @since 11/13/16
+ * @since 11/17/2016
  */
-public final class Units
+public interface HardwareDevice extends Renderable
 {
 
-    private static float PIXELS_TO_INCHES = 0.40f;
-
-    private static float INCHES_TO_METERS = 0.0254f;
-
-    private static float PIXELS_TO_METERS = PIXELS_TO_INCHES * INCHES_TO_METERS;
-
-    //
-    // Conversions
-    //
-
-    public static float pxToIn( float pixels )
-    {
-        return pixels * PIXELS_TO_INCHES;
-    }
-
-    public static float inToPx( float inches )
-    {
-        return inches / PIXELS_TO_INCHES;
-    }
-
-    public static float pxToM( float pixels )
-    {
-        return pixels * PIXELS_TO_METERS;
-    }
-
-    public static Vector2 pxToM( Vector2 input )
-    {
-        return new Vector2( pxToM( input.x ), pxToM( input.y ) );
-    }
-
-    public static float mToPx( float meters )
-    {
-        return meters / PIXELS_TO_METERS;
-    }
-
-    public static Vector2 mToPx( Vector2 input )
-    {
-        return new Vector2( mToPx( input.x ), mToPx( input.y ) );
-    }
-
-    public static float inToM( float inches )
-    {
-        return inches * INCHES_TO_METERS;
-    }
-
-    public static float mToIn( float meters )
-    {
-        return meters / INCHES_TO_METERS;
-    }
+    void update();
 
 }

@@ -166,20 +166,12 @@ public class Robot extends Entity
         return Math.vectorFrom( 0.40f * WIDTH_M, 0.40f * HEIGHT_M, getAngle() + angle ).add( getX(), getY() );
     }
 
-    public void powerMotor( float power, String motorName )
+    public void powerMotor( float power, float angle )
     {
         if ( power < -1f || power > 1f )
         {
             throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
         }
-
-        boolean onLeft = motorName.contains( "left" );
-        boolean onFront = motorName.contains( "front" );
-
-        float angle = Math.QUARTER_PI;
-
-        if ( !onFront ) angle *= 3f;
-        if ( !onLeft ) angle *= -1f;
 
         // NeveRest 40 scaled to power
         Vector2 force = new Vector2( 1f, 1f );
