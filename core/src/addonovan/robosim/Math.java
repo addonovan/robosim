@@ -190,7 +190,7 @@ public final class Math
 
     /**
      * Creates a vector with the given input x and y components (which
-     * will be converted into a magnitude) and angle.
+     * will be converted into a magnitude) and desired output angle.
      *
      * @param x
      *          The x component of the magnitude.
@@ -203,8 +203,27 @@ public final class Math
      */
     public static Vector2 vectorFrom( float x, float y, float angle )
     {
+        return vectorFrom( magnitude( x, y ), angle );
+    }
+
+    /**
+     * Creates a vector with the given input x and y components (
+     * which will be converted into a magnitude) then adds the angle
+     * between the components to the worldAngle and returns the resultant
+     * vector.
+     *
+     * @param x
+     *          The x component of the input vector.
+     * @param y
+     *          The y component of the input vector.
+     * @param worldAngle
+     *          The world angle this vector is rotate by.
+     * @return The resultant vector after the transformations.
+     */
+    public static Vector2 vectorFromAngle( float x, float y, float worldAngle )
+    {
         float localAngle = atan( x, y );
-        return vectorFrom( magnitude( x, y ), localAngle + angle );
+        return vectorFrom( magnitude( x, y ), worldAngle + localAngle );
     }
 
 }

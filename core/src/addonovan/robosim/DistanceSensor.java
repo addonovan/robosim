@@ -71,8 +71,8 @@ public class DistanceSensor implements Sensor
     public DistanceSensor( float x, float y, float angle )
     {
         robot = Simulation.robot;
-        positionVector = Units.pxToM( Math.vectorFrom( x, y, angle ) );
         this.angle = Math.toRadians( angle );
+        positionVector = Units.pxToM( Math.vectorFrom( x, y, this.angle ) );
     }
 
     //
