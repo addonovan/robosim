@@ -75,7 +75,7 @@ public class Robot extends Entity
             float x = bodyX - ( WIDTH / 2 );
             float y = bodyY - ( WIDTH / 2 );
 
-            sr.rect( x, y, WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 1, 1, ( float ) Math.toDegrees( body.getAngle() ) );
+            sr.rect( x, y, WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 1, 1, Math.toDegrees( body.getAngle() ) );
         } );
 
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
@@ -145,12 +145,12 @@ public class Robot extends Entity
 
     private float getMotorOffsetX()
     {
-        return 0.45f * WIDTH_M * ( float ) Math.sin( getAngle() );
+        return 0.45f * WIDTH_M * Math.sin( getAngle() );
     }
 
     private float getMotorOffsetY()
     {
-        return 0.40f * HEIGHT_M * ( float ) Math.sin( getAngle() );
+        return 0.40f * HEIGHT_M * Math.sin( getAngle() );
     }
 
     public void powerMotor( float power, String motorName )
@@ -165,8 +165,8 @@ public class Robot extends Entity
         // NeveRest 40 scaled to power
         float force = 40 * power;
 
-        float force_x = force * ( float ) Math.cos( getAngle() );
-        float force_y = force * ( float ) Math.sin( getAngle() );
+        float force_x = force * Math.cos( getAngle() );
+        float force_y = force * Math.sin( getAngle() );
 
         // apply the force from one motor on there
         body.applyForce( force_x, force_y, x, y, true );
@@ -182,8 +182,8 @@ public class Robot extends Entity
         // 4x NeveRest 40 scaled to power
         float force = 160 * power;
 
-        float force_x = force * ( float ) Math.cos( getAngle() );
-        float force_y = force * ( float ) Math.sin( getAngle() );
+        float force_x = force * Math.cos( getAngle() );
+        float force_y = force * Math.sin( getAngle() );
 
         body.applyForceToCenter( force_x, force_y, true );
     }

@@ -28,6 +28,11 @@ public final class Math
         return ( float ) java.lang.Math.toRadians( degrees );
     }
 
+    public static float toDegrees( float radians )
+    {
+        return ( float ) java.lang.Math.toDegrees( radians );
+    }
+
     //
     // Min/Max
     //
