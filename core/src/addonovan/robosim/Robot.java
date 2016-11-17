@@ -51,8 +51,10 @@ public class Robot extends Entity
     /** The height of all robots. [px] */
     public static final float HEIGHT = Units.inToPx( 18f );
 
+    /** The width of all robots. [m]*/
     public static final float WIDTH_M = Units.pxToM( WIDTH );
 
+    /** The height of all robots. [m] */
     public static final float HEIGHT_M = Units.pxToM( HEIGHT );
 
     //
@@ -62,6 +64,7 @@ public class Robot extends Entity
     /** The body this uses in the physics simulations. */
     private final Body body;
 
+    /** The motors on this robot. */
     private final List< Motor > motors = new ArrayList<>();
 
     /** The sensors in this robot. */
@@ -71,6 +74,9 @@ public class Robot extends Entity
     // Constructors
     //
 
+    /**
+     * Constructs a new robot out of nothing.
+     */
     Robot()
     {
         body = makeBody();
@@ -150,21 +156,30 @@ public class Robot extends Entity
     // Sensors/Motors
     //
 
+    /**
+     * Adds a new motor to this robot.
+     *
+     * @param motor
+     *          The new motor.
+     * @return The same motor, so you can store it if you'd like.
+     */
     public Motor addMotor( Motor motor )
     {
         motors.add( motor );
         return motor;
     }
 
+    /**
+     * Adds a new sensor to this robot.
+     *
+     * @param sensor
+     *          The new sensor.
+     * @return The same sensor, so you can store it if you'd like.
+     */
     public Sensor addSensor( Sensor sensor )
     {
         sensors.add( sensor );
         return sensor;
-    }
-
-    public Sensor getSensor( int i )
-    {
-        return sensors.get( i );
     }
 
     //

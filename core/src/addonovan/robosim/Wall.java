@@ -44,8 +44,10 @@ public class Wall extends Entity
     /** The body of this object. */
     @NotNull private Body body;
 
+    /** The width of this wall [px] */
     private final float width;
 
+    /** The height of this wall [px] */
     private final float height;
 
     //

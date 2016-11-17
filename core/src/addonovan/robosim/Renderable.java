@@ -29,6 +29,9 @@ package addonovan.robosim;
 public interface Renderable
 {
 
+    /**
+     * Renders the object in the simulation.
+     */
     void render();
 
 }

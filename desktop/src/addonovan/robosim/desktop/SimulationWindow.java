@@ -65,6 +65,12 @@ public class SimulationWindow implements WindowListener
     // Actions
     //
 
+    /**
+     * Toggles the control buttons to update to the current state.
+     *
+     * @param running
+     *          If the game is running.
+     */
     private void toggleControlButtons( boolean running )
     {
         startButton.setEnabled( !running );
@@ -97,6 +103,9 @@ public class SimulationWindow implements WindowListener
         simulationPanel.add( lwjglCanvas.getCanvas(), BorderLayout.CENTER );
     }
 
+    /**
+     * Sets up the script editor.
+     */
     private void setUpScriptEditor()
     {
         PythonSyntaxKit.initKit();
@@ -104,6 +113,10 @@ public class SimulationWindow implements WindowListener
         editorPane.setText( Simulation.EMPTY_PROGRAM );
     }
 
+    /**
+     * Attaches the call backs to all the simulation observables which
+     * need to be hooked.
+     */
     private void setUpCallbacks()
     {
         Simulation.runtime.attach( time -> lblRuntime.setText( String.format( "+%.2f s", time ) ) );
@@ -119,6 +132,9 @@ public class SimulationWindow implements WindowListener
         Simulation.running.attach( this::toggleControlButtons );
     }
 
+    /**
+     * Sets up the simulation controls.
+     */
     private void setUpControls()
     {
         startButton.addActionListener( e ->

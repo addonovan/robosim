@@ -35,21 +35,33 @@ public abstract class Entity implements Renderable
     // Actions
     //
 
+    /**
+     * @return The mass of this entity [kg].
+     */
     public float getMass()
     {
         return getBody().getMass();
     }
 
+    /**
+     * @return The x position of the center of this entity [m].
+     */
     public float getX()
     {
         return getBody().getPosition().x;
     }
 
+    /**
+     * @return The y position of the center of this entity [m].
+     */
     public float getY()
     {
         return getBody().getPosition().y;
     }
 
+    /**
+     * @return The angle that this entity is rotated around its center [rad].
+     */
     public float getAngle()
     {
         return getBody().getAngle();

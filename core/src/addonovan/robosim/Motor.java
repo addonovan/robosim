@@ -50,6 +50,14 @@ public class Motor implements HardwareDevice
     // Constructors
     //
 
+    /**
+     * Constructs a new motor with the given local positions on the robot.
+     *
+     * @param x
+     *          The position on the robot [px]
+     * @param y
+     *          The position on the robot [px]
+     */
     public Motor( float x, float y )
     {
         robot = Simulation.robot;
@@ -96,11 +104,17 @@ public class Motor implements HardwareDevice
     // Actions
     //
 
+    /**
+     * @return The position where the motor is on the robot.
+     */
     private Vector2 getStartPosition()
     {
         return Math.vectorFrom( position.len(), position.angleRad() + robot.getAngle() ).add( robot.getX(), robot.getY() );
     }
 
+    /**
+     * @return The ending position (how much the motor is power and which direction).
+     */
     private Vector2 getEndPosition()
     {
         Vector2 start = getStartPosition();

@@ -23,16 +23,21 @@ package addonovan.robosim;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * A utility class for converting between the units used in the simulation.
+ *
  * @author addonovan
  * @since 11/13/16
  */
 public final class Units
 {
 
+    /** [px] -> [in] */
     private static float PIXELS_TO_INCHES = 0.40f;
 
+    /** [in] -> [m] */
     private static float INCHES_TO_METERS = 0.0254f;
 
+    /** [px] -> [m] */
     private static float PIXELS_TO_METERS = PIXELS_TO_INCHES * INCHES_TO_METERS;
 
     //

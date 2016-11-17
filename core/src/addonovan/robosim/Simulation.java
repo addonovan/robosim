@@ -195,6 +195,9 @@ public final class Simulation
         shapeRenderer.end();
     }
 
+    /**
+     * @return The delta time multiplied by the current speed of the simulation.
+     */
     static float deltaTime()
     {
         return ( float ) ( Gdx.graphics.getDeltaTime() * runSpeed.getValue() );
@@ -204,16 +207,25 @@ public final class Simulation
     // Getters/Setters
     //
 
+    /**
+     * Starts the simulation.
+     */
     public static void start()
     {
         running.setValue( true );
     }
 
+    /**
+     * Stops the simulation.
+     */
     public static void stop()
     {
         running.setValue( false );
     }
 
+    /**
+     * @return The world being used by this simulation.
+     */
     static World getWorld()
     {
         return world;

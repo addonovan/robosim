@@ -22,44 +22,68 @@ package addonovan.robosim;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * A class for float-based mathematics.
+ *
  * @author addonovan
  * @since 11/17/2016
  */
 public final class Math
 {
 
+    /** The ratio between a circle's circumference and its diameter.  */
     public static final float PI = ( float ) java.lang.Math.PI;
-
-    public static final float TWO_PI = PI * 2f;
-
-    public static final float HALF_PI = PI / 2f;
-
-    public static final float QUARTER_PI = PI / 4f;
 
     //
     // Trig
     //
 
+    /**
+     * @param angle
+     *          The angle (radians).
+     * @return The cosine of the angle.
+     */
     public static float cos( float angle )
     {
         return ( float ) java.lang.Math.cos( angle );
     }
 
+    /**
+     * @param angle
+     *          The angle (radians).
+     * @return The sine of the angle.
+     */
     public static float sin( float angle )
     {
         return ( float ) java.lang.Math.sin( angle );
     }
 
+    /**
+     * @param x
+     *          The x component of the triangle.
+     * @param y
+     *          The y component of the triangle.
+     * @return ArcTan( y / x )
+     */
     public static float atan( float x, float y )
     {
-        return ( float ) java.lang.Math.atan2( x, y );
+        return ( float ) java.lang.Math.atan2( y, x );
     }
 
+    /**
+     * @param degrees
+     *          The angle measure in degrees.
+     * @return The angle measure in radians.
+     */
     public static float toRadians( float degrees )
     {
         return ( float ) java.lang.Math.toRadians( degrees );
     }
 
+    /**
+     * @param radians
+     *          The angle measure in radians.
+     * @return The angle measure in degrees.
+     */
     public static float toDegrees( float radians )
     {
         return ( float ) java.lang.Math.toDegrees( radians );
@@ -69,16 +93,35 @@ public final class Math
     // Min/Max
     //
 
+    /**
+     * @param a
+     *          A number.
+     * @param b
+     *          Another number.
+     * @return The larger of the two numbers.
+     */
     public static float max( float a, float b )
     {
         return a > b ? a : b;
     }
 
+    /**
+     * @param a
+     *          A number.
+     * @param b
+     *          Another number.
+     * @return The smaller of the two numbers.
+     */
     public static float min( float a, float b )
     {
         return a < b ? a : b;
     }
 
+    /**
+     * @param a
+     *          A number.
+     * @return |a|
+     */
     public static float abs( float a )
     {
         return a < 0 ? -a : a;
@@ -88,11 +131,23 @@ public final class Math
     // Sqrt/Pow
     //
 
+    /**
+     * @param f
+     *          A number.
+     * @return The square root of the number.
+     */
     public static float sqrt( float f )
     {
         return ( float ) java.lang.Math.sqrt( f );
     }
 
+    /**
+     * @param a
+     *          A number.
+     * @param b
+     *          The power to raise a to.
+     * @return a^b
+     */
     public static float pow( float a, float b )
     {
         return ( float ) java.lang.Math.pow( a, b );
@@ -102,6 +157,15 @@ public final class Math
     // Vectors
     //
 
+    /**
+     * The magnitude of the vecotr with the given components.
+     *
+     * @param x
+     *          The x component of the vector.
+     * @param y
+     *          The y component of the vector.
+     * @return sqrt( x^2 + y^2 )
+     */
     public static float magnitude( float x, float y )
     {
         return sqrt( x * x + y * y );

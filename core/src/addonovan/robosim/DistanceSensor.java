@@ -79,6 +79,9 @@ public class DistanceSensor implements Sensor
     // Getters
     //
 
+    /**
+     * @return The distance [0, 2.55], or -1 if no distance was sensed.
+     */
     public float getDistance()
     {
         return distance;
@@ -115,6 +118,7 @@ public class DistanceSensor implements Sensor
         } );
     }
 
+    @Override
     public void update()
     {
         Vector2 start = getStartPosition();
@@ -134,11 +138,22 @@ public class DistanceSensor implements Sensor
 
     }
 
+    /**
+     * @return The starting position (where the sensor is on the robot).
+     */
     private Vector2 getStartPosition()
     {
         return Math.vectorFrom( positionVector.len(), robot.getAngle() + positionVector.angle() ).add( robot.getX(), robot.getY() );
     }
 
+    /**
+     * @param start
+     *          The starting position (where the sensor is on the robot).
+     * @param length
+     *          The length of the line to fetch [m].
+     *
+     * @return The ending position of the line of the distance sensor's range.
+     */
     private Vector2 getEndPosition( Vector2 start, float length )
     {
         return Math.vectorFrom( length, angle + robot.getAngle() ).add( start.x, start.y );

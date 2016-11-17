@@ -30,7 +30,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import org.lwjgl.opengl.GL11;
 
 /**
- *
+ * The application class for the robot simulation.
  *
  * @author addonovan
  * @since 11/11/16
