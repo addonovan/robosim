@@ -75,8 +75,6 @@ public class Robot extends Entity
     {
         body = makeBody();
         body.setTransform( Units.inToM( 11 ) + Units.pxToM( WIDTH / 2 ), Units.inToM( 11 ) + Units.pxToM( HEIGHT / 2 ), 0f );
-
-        sensors.add( new DistanceSensor( this, 9f, 0f, 0f ) );
     }
 
     //

@@ -129,11 +129,13 @@ public final class Math
      *          The y component of the magnitude.
      * @param angle
      *          The angle (radians) of the vector.
+     *
      * @return The vector created by this.
      */
     public static Vector2 vectorFrom( float x, float y, float angle )
     {
-        return vectorFrom( magnitude( x, y ), angle );
+        float localAngle = atan( x, y );
+        return vectorFrom( magnitude( x, y ), localAngle + angle );
     }
 
 }

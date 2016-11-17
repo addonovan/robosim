@@ -53,8 +53,7 @@ public class Motor implements HardwareDevice
     public Motor( float x, float y )
     {
         robot = Simulation.robot;
-        float localAngle = Math.atan( x, y );
-        position = Units.pxToM( Math.vectorFrom( x, y, localAngle + robot.getAngle() ) );
+        position = Units.pxToM( Math.vectorFrom( x, y, robot.getAngle() ) );
     }
 
     //

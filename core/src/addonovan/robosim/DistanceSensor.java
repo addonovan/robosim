@@ -61,22 +61,17 @@ public class DistanceSensor implements Sensor
     /**
      * Constructs a new distance sensor on the given robot.
      *
-     * @param robot
-     *          The robot this is attached to.
      * @param x
-     *          The x position on the robot (relative to its center) [in].
+     *          The x position on the robot (relative to its center) [px].
      * @param y
-     *          The y position on the robot (relative to its center) [in].
+     *          The y position on the robot (relative to its center) [px].
      * @param angle
      *          The angle of the sensor (relative to the robot) [°].
      */
-    DistanceSensor( Robot robot, float x, float y, float angle )
+    public DistanceSensor( float x, float y, float angle )
     {
-        x = Units.inToM( x );
-        y = Units.inToM( y );
-        positionVector = new Vector2( x, y );
-
-        this.robot = robot;
+        robot = Simulation.robot;
+        positionVector = Units.pxToM( Math.vectorFrom( x, y, angle ) );
         this.angle = Math.toRadians( angle );
     }
 

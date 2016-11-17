@@ -24,16 +24,8 @@
 
 from addonovan.robosim import Robot
 from addonovan.robosim import Motor
+from addonovan.robosim import DistanceSensor
 from addonovan.robosim import Simulation
-
-class DistanceSensor:
-
-    def __init__(self, sensor):
-        self.sensor = sensor
-
-    def get_distance(self):
-        return self.sensor.getDistance()
-
 
 class PyRobot:
 
@@ -47,7 +39,7 @@ class PyRobot:
         self.mtr_fl = Simulation.robot.addMotor( Motor( -x_diff,  y_diff ) )
         self.mtr_bl = Simulation.robot.addMotor( Motor( -x_diff, -y_diff ) )
 
-        self.sensor_distance = DistanceSensor(Simulation.robot.getSensor(0))
+        self.sensor_distance = Simulation.robot.addSensor( DistanceSensor( 0, Robot.WIDTH / 2, 0 ) )
 
 
     # INSERT def loop(): here
