@@ -50,6 +50,11 @@ public final class Math
         return ( float ) java.lang.Math.sin( angle );
     }
 
+    public static float atan( float x, float y )
+    {
+        return ( float ) java.lang.Math.atan2( x, y );
+    }
+
     public static float toRadians( float degrees )
     {
         return ( float ) java.lang.Math.toRadians( degrees );

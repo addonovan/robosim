@@ -38,7 +38,6 @@ public class Motor implements HardwareDevice
     // Fields
     //
 
-    /** The robot to which this motor is attached. */
     private final Robot robot;
 
     /** The vector that points to the location of the motor [m].*/
@@ -51,10 +50,11 @@ public class Motor implements HardwareDevice
     // Constructors
     //
 
-    Motor( Robot robot, float x, float y, float angle )
+    public Motor( float x, float y )
     {
-        this.robot = robot;
-        position = Units.pxToM( Math.vectorFrom( x, y, angle ) );
+        robot = Simulation.robot;
+        float localAngle = Math.atan( x, y );
+        position = Units.pxToM( Math.vectorFrom( x, y, localAngle + robot.getAngle() ) );
     }
 
     //
@@ -64,12 +64,12 @@ public class Motor implements HardwareDevice
     @Override
     public void render()
     {
+        Vector2 start = Units.mToPx( getStartPosition() );
+        Vector2 end = Units.mToPx( getEndPosition() );
+
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
         {
             sr.setColor( Color.RED );
-
-            Vector2 start = getStartPoistion();
-            Vector2 end = getEndPosition( start );
 
             sr.circle( start.x, start.y, 2 );
             sr.line( start, end );
@@ -79,10 +79,10 @@ public class Motor implements HardwareDevice
     @Override
     public void update()
     {
-        if ( power < 1f || power > 1f )
+        if ( power < -1f || power > 1f )
         {
+            Gdx.app.log( "Motor", "Invalid power setting: " + power );
             power = 0f;
-            Gdx.app.log( "Motor", "Invalid power setting: " + 1f );
             return;
         }
 
@@ -97,14 +97,15 @@ public class Motor implements HardwareDevice
     // Actions
     //
 
-    private Vector2 getStartPoistion()
+    private Vector2 getStartPosition()
     {
         return Math.vectorFrom( position.len(), position.angleRad() + robot.getAngle() ).add( robot.getX(), robot.getY() );
     }
 
-    private Vector2 getEndPosition( Vector2 start )
+    private Vector2 getEndPosition()
     {
-        return Math.vectorFrom( power, robot.getAngle() ).add( start.x, start.y );
+        Vector2 start = getStartPosition();
+        return Math.vectorFrom( power * Robot.WIDTH_M * 0.4f, robot.getAngle() ).add( start.x, start.y );
     }
 
 }

@@ -22,23 +22,9 @@
 # SOFTWARE.
 #
 
+from addonovan.robosim import Robot
+from addonovan.robosim import Motor
 from addonovan.robosim import Simulation
-
-def set_run_speed(speed):
-    if speed < 0.01:
-        speed = 0.01
-    elif speed > 5:
-        speed = 5
-
-    Simulation.runSpeed.setValue( speed )
-
-class Motor:
-
-    def __init__(self, id):
-        self.id = id
-
-    def set_power(self, power):
-        Simulation.robot.powerMotor( power, self.id )
 
 class DistanceSensor:
 
@@ -52,11 +38,14 @@ class DistanceSensor:
 class PyRobot:
 
     def __init__(self):
-        # create the motors
-        self.mtr_fl = Motor("front_left")
-        self.mtr_fr = Motor("front_right")
-        self.mtr_bl = Motor("back_left")
-        self.mtr_br = Motor("back_right")
+        x_diff = Robot.WIDTH * 0.40
+        y_diff = Robot.HEIGHT * 0.40
+
+        self.mtr_fr = Simulation.robot.addMotor( Motor(  x_diff,  y_diff ) )
+        self.mtr_br = Simulation.robot.addMotor( Motor(  x_diff, -y_diff ) )
+
+        self.mtr_fl = Simulation.robot.addMotor( Motor( -x_diff,  y_diff ) )
+        self.mtr_bl = Simulation.robot.addMotor( Motor( -x_diff, -y_diff ) )
 
         self.sensor_distance = DistanceSensor(Simulation.robot.getSensor(0))
 

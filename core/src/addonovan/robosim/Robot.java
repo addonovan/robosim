@@ -46,14 +46,14 @@ public class Robot extends Entity
     //
 
     /** The width of all robots. [px] */
-    private static final float WIDTH = Units.inToPx( 18f );
+    public static final float WIDTH = Units.inToPx( 18f );
 
     /** The height of all robots. [px] */
-    private static final float HEIGHT = Units.inToPx( 18f );
+    public static final float HEIGHT = Units.inToPx( 18f );
 
-    private static final float WIDTH_M = Units.pxToM( WIDTH );
+    public static final float WIDTH_M = Units.pxToM( WIDTH );
 
-    private static final float HEIGHT_M = Units.pxToM( HEIGHT );
+    public static final float HEIGHT_M = Units.pxToM( HEIGHT );
 
     //
     // Fields
@@ -61,6 +61,8 @@ public class Robot extends Entity
 
     /** The body this uses in the physics simulations. */
     private final Body body;
+
+    private final List< Motor > motors = new ArrayList<>();
 
     /** The sensors in this robot. */
     private final List< Sensor > sensors = new ArrayList<>();
@@ -100,16 +102,10 @@ public class Robot extends Entity
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
         {
             sr.setColor( Color.GREEN );
-
-            for ( int i = 0; i < 4; i++ )
-            {
-                float angle = ( ( 2 * i ) + 1 ) * Math.QUARTER_PI;
-                Vector2 position = Units.mToPx( getMotorPosition( angle ) );
-
-                sr.circle( position.x, position.y, 2 );
-            }
-
         } );
+
+        motors.forEach( HardwareDevice::update );
+        motors.forEach( HardwareDevice::render );
 
         sensors.forEach( Sensor::update );
         sensors.forEach( Sensor::render );
@@ -153,34 +149,29 @@ public class Robot extends Entity
     }
 
     //
-    // Actions
+    // Sensors/Motors
     //
+
+    public Motor addMotor( Motor motor )
+    {
+        motors.add( motor );
+        return motor;
+    }
+
+    public Sensor addSensor( Sensor sensor )
+    {
+        sensors.add( sensor );
+        return sensor;
+    }
 
     public Sensor getSensor( int i )
     {
         return sensors.get( i );
     }
 
-    private Vector2 getMotorPosition( float angle )
-    {
-        return Math.vectorFrom( 0.40f * WIDTH_M, 0.40f * HEIGHT_M, getAngle() + angle ).add( getX(), getY() );
-    }
-
-    public void powerMotor( float power, float angle )
-    {
-        if ( power < -1f || power > 1f )
-        {
-            throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
-        }
-
-        // NeveRest 40 scaled to power
-        Vector2 force = new Vector2( 1f, 1f );
-        force.setLength( 40 * power );
-        force.setAngleRad( getAngle() );
-
-        // apply the force from one motor on there
-        body.applyForce( force, getMotorPosition( angle ), true );
-    }
+    //
+    // Debug Movement
+    //
 
     void move( float power )
     {
