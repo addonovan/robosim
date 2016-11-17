@@ -79,6 +79,11 @@ public final class Math
         return a < b ? a : b;
     }
 
+    public static float abs( float a )
+    {
+        return a < 0 ? -a : a;
+    }
+
     //
     // Sqrt/Pow
     //
@@ -114,7 +119,7 @@ public final class Math
     public static Vector2 vectorFrom( float magnitude, float angle )
     {
         Vector2 v = new Vector2( 1f, 1f );
-        v.setLength( magnitude );
+        v.setLength( abs( magnitude ) );
         v.setAngleRad( angle );
         return v;
     }

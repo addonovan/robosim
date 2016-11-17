@@ -178,7 +178,13 @@ public class Robot extends Entity
             throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
         }
 
-        body.applyForceToCenter( Math.vectorFrom( 160f * power, getAngle() ), true );
+        float angle = getAngle();
+        if ( power < 0 )
+        {
+            angle += Math.PI;
+        }
+
+        body.applyForceToCenter( Math.vectorFrom( 200f * power, angle ), true );
     }
 
     void rotate( float power )

@@ -100,10 +100,16 @@ public class DistanceSensor implements Sensor
                 alpha = ( 0.7f ) * ( 1 - ( distance / MAX_DISTANCE ) ) + 0.3f;
             }
 
+            float localDistance = distance;
+            if ( localDistance < 0f )
+            {
+                localDistance = MAX_DISTANCE;
+            }
+
 
             sr.setColor( new Color( 1, 1, 0, alpha ) );
             Vector2 start = getStartPosition();
-            Vector2 end = getEndPosition( start );
+            Vector2 end = getEndPosition( start, localDistance );
 
             sr.line( Units.mToPx( start ), Units.mToPx( end ) );
         } );
@@ -112,7 +118,7 @@ public class DistanceSensor implements Sensor
     public void update()
     {
         Vector2 start = getStartPosition();
-        Vector2 end = getEndPosition( start );
+        Vector2 end = getEndPosition( start, MAX_DISTANCE );
 
         distance = -1f;
         Simulation.getWorld().rayCast( ( fixture, point, normal, fraction ) ->
@@ -133,9 +139,9 @@ public class DistanceSensor implements Sensor
         return Math.vectorFrom( positionVector.len(), robot.getAngle() + positionVector.angle() ).add( robot.getX(), robot.getY() );
     }
 
-    private Vector2 getEndPosition( Vector2 start )
+    private Vector2 getEndPosition( Vector2 start, float length )
     {
-        return Math.vectorFrom( MAX_DISTANCE, angle + robot.getAngle() ).add( start.x, start.y );
+        return Math.vectorFrom( length, angle + robot.getAngle() ).add( start.x, start.y );
     }
 
 }
