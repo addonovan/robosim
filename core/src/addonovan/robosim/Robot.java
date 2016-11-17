@@ -1,5 +1,6 @@
 package addonovan.robosim;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -62,6 +63,8 @@ public class Robot extends Entity
     // Rendering
     //
 
+    private float angle = 0f;
+
     @Override
     public void render()
     {
@@ -82,15 +85,14 @@ public class Robot extends Entity
         {
             sr.setColor( Color.GREEN );
 
-            float x = Units.mToPx( getX() );
-            float y = Units.mToPx( getY() );
-            float xOffset = Units.mToPx( getMotorOffsetX() );
-            float yOffset = Units.mToPx( getMotorOffsetY() );
+            for ( int i = 0; i < 4; i++ )
+            {
+                float angle = ( ( 2 * i ) + 1 ) * Math.QUARTER_PI;
+                Vector2 position = Units.mToPx( getMotorPosition( angle ) );
 
-            sr.circle( x + xOffset, y + yOffset, 2 );
-            sr.circle( x - xOffset, y + yOffset, 2 );
-            sr.circle( x - xOffset, y - yOffset, 2 );
-            sr.circle( x + xOffset, y - yOffset, 2 );
+                sr.circle( position.x, position.y, 2 );
+            }
+
         } );
 
         sensors.forEach( Sensor::update );
@@ -143,14 +145,14 @@ public class Robot extends Entity
         return sensors.get( i );
     }
 
-    private float getMotorOffsetX()
+    private Vector2 getMotorPosition( float angle )
     {
-        return 0.45f * WIDTH_M * Math.sin( getAngle() );
-    }
+        float mag = 0.40f * Math.magnitude( WIDTH_M, HEIGHT_M );
 
-    private float getMotorOffsetY()
-    {
-        return 0.40f * HEIGHT_M * Math.sin( getAngle() );
+        float x = mag * Math.cos( angle + getAngle() );
+        float y = mag * Math.sin( angle + getAngle() );
+
+        return new Vector2( x, y ).add( getX(), getY() );
     }
 
     public void powerMotor( float power, String motorName )
@@ -158,18 +160,20 @@ public class Robot extends Entity
         boolean onLeft = motorName.contains( "left" );
         boolean onFront = motorName.contains( "front" );
 
-        // the center of the robot
-        float x = getX() + ( onLeft ? -1 : 1 ) * getMotorOffsetX();
-        float y = getY() + ( onFront ? 1 : -1 ) * getMotorOffsetY();
+        float angle = Math.QUARTER_PI;
+
+        if ( !onFront ) angle *= 3f;
+        if ( !onLeft ) angle *= -1f;
+
+        Vector2 position = getBody().getPosition();
 
         // NeveRest 40 scaled to power
-        float force = 40 * power;
-
-        float force_x = force * Math.cos( getAngle() );
-        float force_y = force * Math.sin( getAngle() );
+        Vector2 force = new Vector2( 1f, 1f );
+        force.setLength( 40 * power );
+        force.setAngleRad( getAngle() );
 
         // apply the force from one motor on there
-        body.applyForce( force_x, force_y, x, y, true );
+        body.applyForce( force, getMotorPosition( angle ), true );
     }
 
     void move( float power )

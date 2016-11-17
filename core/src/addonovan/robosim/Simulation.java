@@ -176,6 +176,11 @@ public final class Simulation
         shapeRenderer.end();
     }
 
+    static float deltaTime()
+    {
+        return ( float ) ( Gdx.graphics.getDeltaTime() * runSpeed.getValue() );
+    }
+
     //
     // Getters/Setters
     //
