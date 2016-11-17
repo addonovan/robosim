@@ -163,7 +163,7 @@ public class Robot extends Entity
 
     private Vector2 getMotorPosition( float angle )
     {
-        return Math.vectorFrom( 0.40f * WIDTH_M, 0.40f * HEIGHT_M, angle ).add( getX(), getY() );
+        return Math.vectorFrom( 0.40f * WIDTH_M, 0.40f * HEIGHT_M, getAngle() + angle ).add( getX(), getY() );
     }
 
     public void powerMotor( float power, String motorName )
