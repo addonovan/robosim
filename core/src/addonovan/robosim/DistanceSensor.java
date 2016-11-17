@@ -26,11 +26,8 @@ public class DistanceSensor implements Sensor
     /** The robot to which this sensor is attached.*/
     private final Robot robot;
 
-    /** The magnitude of the vector which places us in the correct location. */
-    private final float positionMagnitude;
-
-    /** The angle of the vector which places the sensor in the correct location. */
-    private final float positionAngle;
+    /** The vector that points to the position of this sensor on the robot. */
+    private final Vector2 positionVector;
 
     /** The angle of the sensor when attached. */
     private final float angle;
@@ -58,11 +55,10 @@ public class DistanceSensor implements Sensor
     {
         x = Units.inToM( x );
         y = Units.inToM( y );
+        positionVector = new Vector2( x, y );
 
         this.robot = robot;
-        positionMagnitude = ( float ) Math.sqrt( ( x * x ) + ( y * y ) );
-        positionAngle = ( float ) Math.atan2( y, x );
-        this.angle = ( float ) Math.toRadians( angle );
+        this.angle = Math.toRadians( angle );
     }
 
     //
@@ -121,8 +117,8 @@ public class DistanceSensor implements Sensor
     private Vector2 getStartPosition()
     {
         float robotAngle = robot.getAngle();
-        float x = positionMagnitude * ( float ) Math.cos( robotAngle + positionAngle );
-        float y = positionMagnitude * ( float ) Math.sin( robotAngle + positionAngle );
+        float x = positionVector.len() * Math.cos( robotAngle + positionVector.angle() );
+        float y = positionVector.len() * Math.sin( robotAngle + positionVector.angle() );
 
         return robot.getBody().getPosition().add( x, y );
     }
@@ -132,8 +128,8 @@ public class DistanceSensor implements Sensor
         float robotAngle = robot.getAngle();
 
         Vector2 end = new Vector2( start );
-        end.x += MAX_DISTANCE * ( float ) Math.cos( angle + robotAngle );
-        end.y += MAX_DISTANCE * ( float ) Math.sin( angle + robotAngle );
+        end.x += MAX_DISTANCE * Math.cos( angle + robotAngle );
+        end.y += MAX_DISTANCE * Math.sin( angle + robotAngle );
 
         return end;
     }
