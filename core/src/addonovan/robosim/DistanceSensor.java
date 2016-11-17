@@ -87,7 +87,7 @@ public class DistanceSensor implements Sensor
             float alpha = 0.15f;
             if ( distance > 0.001f )
             {
-                alpha = ( 0.7f ) * ( distance / MAX_DISTANCE ) + 0.3f;
+                alpha = ( 0.7f ) * ( 1 - ( distance / MAX_DISTANCE ) ) + 0.3f;
             }
 
             sr.setColor( new Color( 1, 1, 0, alpha ) );

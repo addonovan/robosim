@@ -33,7 +33,7 @@ public final class Simulation
     //
 
     /** The robot being simulated. */
-    @NotNull private static Robot robot;
+    @NotNull public static Robot robot;
 
     private static final List< Renderable > renderables = new ArrayList<>();
 
@@ -95,7 +95,7 @@ public final class Simulation
         world = new World( new Vector2( 0f, 0f ), false );
         robot = new Robot();
         interpreter.set( "robot", robot );
-        interpreter.exec( "pyRobot = PyRobot(robot)" );
+        interpreter.exec( "pyRobot = PyRobot()" );
         loop = interpreter.get( "pyRobot" ).__getattr__( "loop" );
 
         renderables.clear();

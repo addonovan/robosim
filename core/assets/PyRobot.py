@@ -33,12 +33,11 @@ def set_run_speed(speed):
 
 class Motor:
 
-    def __init__(self, robot, id):
-        self.robot = robot
+    def __init__(self, id):
         self.id = id
 
     def set_power(self, power):
-        self.robot.powerMotor( power, self.id )
+        Simulation.robot.powerMotor( power, self.id )
 
 class DistanceSensor:
 
@@ -51,16 +50,14 @@ class DistanceSensor:
 
 class PyRobot:
 
-    def __init__(self, robot):
-        self.robot = robot
-
+    def __init__(self):
         # create the motors
-        self.mtr_fl = Motor(robot, "front_left")
-        self.mtr_fr = Motor(robot, "front_right")
-        self.mtr_bl = Motor(robot, "back_left")
-        self.mtr_br = Motor(robot, "back_right")
+        self.mtr_fl = Motor("front_left")
+        self.mtr_fr = Motor("front_right")
+        self.mtr_bl = Motor("back_left")
+        self.mtr_br = Motor("back_right")
 
-        self.sensor_distance   = DistanceSensor(robot.getSensor(0))
+        self.sensor_distance = DistanceSensor(Simulation.robot.getSensor(0))
 
 
     # INSERT def loop(): here
