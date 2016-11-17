@@ -168,6 +168,11 @@ public class Robot extends Entity
 
     public void powerMotor( float power, String motorName )
     {
+        if ( power < -1f || power > 1f )
+        {
+            throw new IllegalArgumentException( "Power must be on the interval [-1f, 1f]. (was " + power + ")" );
+        }
+
         boolean onLeft = motorName.contains( "left" );
         boolean onFront = motorName.contains( "front" );
 
