@@ -71,15 +71,16 @@ public class Motor implements HardwareDevice
     @Override
     public void render()
     {
-        Vector2 start = Units.mToPx( getStartPosition() );
-        Vector2 end = Units.mToPx( getEndPosition() );
-
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
         {
             sr.setColor( Color.RED );
 
+            Vector2 start = Units.mToPx( getStartPosition() );
+            Vector2 end = Units.mToPx( getEndPosition() );
+
             sr.circle( start.x, start.y, 2 );
             sr.line( start, end );
+
         } );
     }
 
@@ -95,7 +96,14 @@ public class Motor implements HardwareDevice
 
         // apply the force to the robot
         Vector2 position = robot.getBody().getPosition().add( this.position );
-        Vector2 force = Math.vectorFrom( 40f * power, robot.getAngle() );
+
+        float angle = robot.getAngle();
+        if ( power < 0 )
+        {
+            angle -= Math.PI;
+        }
+
+        Vector2 force = Math.vectorFrom( 40f * power, angle );
 
         robot.getBody().applyForce( force, position, true );
     }

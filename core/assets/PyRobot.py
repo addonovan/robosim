@@ -33,11 +33,11 @@ class PyRobot:
         x_diff = Robot.WIDTH * 0.40
         y_diff = Robot.HEIGHT * 0.40
 
-        self.mtr_fr = Simulation.robot.addMotor( Motor(  x_diff,  y_diff ) )
-        self.mtr_br = Simulation.robot.addMotor( Motor(  x_diff, -y_diff ) )
+        self.mtr_fl = Simulation.robot.addMotor( Motor(  x_diff,  y_diff ) )
+        self.mtr_fr = Simulation.robot.addMotor( Motor(  x_diff, -y_diff ) )
 
-        self.mtr_fl = Simulation.robot.addMotor( Motor( -x_diff,  y_diff ) )
-        self.mtr_bl = Simulation.robot.addMotor( Motor( -x_diff, -y_diff ) )
+        self.mtr_bl = Simulation.robot.addMotor( Motor( -x_diff,  y_diff ) )
+        self.mtr_br = Simulation.robot.addMotor( Motor( -x_diff, -y_diff ) )
 
         self.sensor_distance = Simulation.robot.addSensor( DistanceSensor( 0, Robot.WIDTH / 2, 0 ) )
 
