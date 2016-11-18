@@ -31,13 +31,13 @@ def move(self, power):
         else:
             power = -0.1
 
-    self.mtr_fl.set_power(power)
-    self.mtr_fr.set_power(power)
-    self.mtr_bl.set_power(power)
-    self.mtr_br.set_power(power)
+    self.mtr_fl.power = power
+    self.mtr_fr.power = power
+    self.mtr_bl.power = power
+    self.mtr_br.power = power
 
 def loop(self):
-    distance = self.sensor_distance.get_distance()
+    distance = self.sensor_distance.getDistance()
 
     if distance < 0.20 and distance != -1:
         self.edge = True
@@ -51,6 +51,5 @@ def loop(self):
 
     if self.edge:
         power *= -1
-
 
     self.move( power )
