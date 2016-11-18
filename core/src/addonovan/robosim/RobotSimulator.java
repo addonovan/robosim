@@ -67,6 +67,11 @@ public class RobotSimulator extends ApplicationAdapter
 
         Gdx.gl.glEnable( GL11.GL_BLEND );
         Gdx.gl.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
+
+        Gdx.gl.glEnable( GL11.GL_LINE_SMOOTH );
+        Gdx.gl.glEnable( GL11.GL_POINT_SMOOTH );
+        Gdx.gl.glHint( GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST );
+        Gdx.gl.glHint( GL11.GL_POINT_SMOOTH_HINT, GL11.GL_NICEST );
     }
 
     @Override

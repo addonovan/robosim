@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
-      <xy x="20" y="20" width="616" height="441"/>
+      <xy x="20" y="20" width="805" height="482"/>
     </constraints>
     <properties/>
     <border type="line">
@@ -129,22 +129,40 @@
             <properties/>
             <border type="none"/>
             <children>
-              <scrollpane id="dab96">
+              <splitpane id="a53ec">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="200" height="200"/>
+                  </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <resizeWeight value="0.8"/>
+                </properties>
                 <border type="none"/>
                 <children>
-                  <component id="85648" class="javax.swing.JEditorPane" binding="editorPane">
-                    <constraints/>
-                    <properties>
-                      <background color="-328966"/>
-                      <text value=""/>
-                    </properties>
-                  </component>
+                  <scrollpane id="dab96">
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="85648" class="javax.swing.JEditorPane" binding="scriptEditor">
+                        <constraints/>
+                        <properties>
+                          <background color="-328966"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <nested-form id="8fc6e" form-file="addonovan/robosim/desktop/DocTree.form" binding="docTree">
+                    <constraints>
+                      <splitpane position="right"/>
+                    </constraints>
+                  </nested-form>
                 </children>
-              </scrollpane>
+              </splitpane>
             </children>
           </grid>
         </children>

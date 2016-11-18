@@ -135,8 +135,8 @@ public final class Simulation
      */
     static void render()
     {
-        robot.render();
         renderables.forEach( Renderable::render );
+        robot.render();
     }
 
     /**

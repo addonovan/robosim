@@ -79,7 +79,7 @@ public class Motor implements HardwareDevice
             Vector2 end = Units.mToPx( getEndPosition() );
 
             sr.circle( start.x, start.y, 2 );
-            sr.line( start, end );
+            sr.rectLine( start, end, 2 );
 
         } );
     }
@@ -126,7 +126,11 @@ public class Motor implements HardwareDevice
     private Vector2 getEndPosition()
     {
         Vector2 start = getStartPosition();
-        return Math.vectorFrom( power * Robot.WIDTH_M * 0.4f, robot.getAngle() ).add( start.x, start.y );
+
+        float angle = robot.getAngle();
+        if ( power < 0 ) angle -= Math.PI;
+
+        return Math.vectorFrom( power * Robot.WIDTH_M * 0.4f, angle ).add( start.x, start.y );
     }
 
 }

@@ -42,4 +42,4 @@ class PyRobot:
         self.sensor_distance = Simulation.robot.addSensor( DistanceSensor( 0, Robot.WIDTH / 2, 0 ) )
 
 
-    # INSERT def loop(): here
+    # INSERT HERE

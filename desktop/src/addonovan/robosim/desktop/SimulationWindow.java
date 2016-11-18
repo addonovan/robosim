@@ -34,20 +34,28 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
+ * The window that displays information to the user.
+ *
  * @author addonovan
  * @since 11/15/16
  */
 public class SimulationWindow implements WindowListener
 {
+
+    //
+    // Components
+    //
+
     private JPanel rootPanel;
     private JPanel simulationPanel;
     private JSlider sliderRunSpeed;
-    private JEditorPane editorPane;
+    private JEditorPane scriptEditor;
     private JButton startButton;
     private JButton stopButton;
     private JButton restartButton;
     private JButton resetButton;
     private JLabel lblRuntime;
+    private DocTree docTree; // this isn't actually an error, the IDE is just being wonky, I guess
 
     //
     // Constructors
@@ -56,7 +64,7 @@ public class SimulationWindow implements WindowListener
     public SimulationWindow()
     {
         setUpSimulationPanel();
-        setUpScriptEditor();
+        setUpEditors();
         setUpCallbacks();
         setUpControls();
     }
@@ -98,6 +106,7 @@ public class SimulationWindow implements WindowListener
         config.width = config.height = size;
         config.title = "Robot Simulator";
         config.vSyncEnabled = true;
+        config.samples = 4;
 
         LwjglAWTCanvas lwjglCanvas = new LwjglAWTCanvas( new RobotSimulator(), config );
         simulationPanel.add( lwjglCanvas.getCanvas(), BorderLayout.CENTER );
@@ -106,11 +115,11 @@ public class SimulationWindow implements WindowListener
     /**
      * Sets up the script editor.
      */
-    private void setUpScriptEditor()
+    private void setUpEditors()
     {
         PythonSyntaxKit.initKit();
-        editorPane.setContentType( "text/python" );
-        editorPane.setText( Simulation.EMPTY_PROGRAM );
+        scriptEditor.setContentType( "text/python" );
+        scriptEditor.setText( Simulation.EMPTY_PROGRAM );
     }
 
     /**
@@ -147,7 +156,7 @@ public class SimulationWindow implements WindowListener
 
         resetButton.addActionListener( e ->
         {
-            Simulation.newInterpreter( editorPane.getText() );
+            Simulation.newInterpreter( scriptEditor.getText() );
             Simulation.initialize();
         } );
 
@@ -198,4 +207,5 @@ public class SimulationWindow implements WindowListener
     @Override public void windowDeiconified( WindowEvent e ) {}
     @Override public void windowActivated( WindowEvent e ) {}
     @Override public void windowDeactivated( WindowEvent e ) {}
+
 }

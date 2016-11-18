@@ -94,7 +94,7 @@ public class DistanceSensor implements Sensor
     @Override
     public void render()
     {
-        Simulation.renderShape( ShapeRenderer.ShapeType.Line, sr ->
+        Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
         {
 
             float alpha = 0.15f;
@@ -114,7 +114,7 @@ public class DistanceSensor implements Sensor
             Vector2 start = getStartPosition();
             Vector2 end = getEndPosition( start, localDistance );
 
-            sr.line( Units.mToPx( start ), Units.mToPx( end ) );
+            sr.rectLine( Units.mToPx( start ), Units.mToPx( end ), 2 );
         } );
     }
 
