@@ -87,12 +87,8 @@ public class Motor implements HardwareDevice
     @Override
     public void update()
     {
-        if ( power < -1f || power > 1f )
-        {
-            Gdx.app.log( "Motor", "Invalid power setting: " + power );
-            power = 0f;
-            return;
-        }
+        if ( power < -1f ) power = -1f;
+        if ( power > 1f ) power = 1f;
 
         // apply the force to the robot
         Vector2 position = robot.getBody().getPosition().add( this.position );
