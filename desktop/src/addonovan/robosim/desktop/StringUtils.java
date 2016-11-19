@@ -21,7 +21,7 @@ public final class StringUtils
     public static String trim( String input )
     {
         return input
-                .replaceAll( "^# ?", "" )             // remove leading #'s
+                .replaceAll( "(?<=^|\n)# ?", "" )     // remove leading #'s
                 .replaceAll( "^ ", "" )               // remove leading spaces
                 .replaceAll( "(?<!\n)\n(?!\n)", " " ) // remove single \n's
                 .trim();                              // does regular trimming
