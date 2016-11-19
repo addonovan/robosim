@@ -13,6 +13,10 @@ import java.util.regex.Pattern;
 public final class StringUtils
 {
 
+    //
+    // Constants
+    //
+
     /** System.lineSeparator() */
     private static final String NEW_LINE = System.lineSeparator();
 
@@ -24,6 +28,10 @@ public final class StringUtils
 
     /** Matches all the instances where there is a single new line. */
     private static final Pattern SINGLE_NEWLINES = Pattern.compile( "(?<!" + NEW_LINE +")" + NEW_LINE + "(?!" + NEW_LINE + ")" );
+
+    //
+    // Actions
+    //
 
     /**
      * Trims the input string with custom things.
