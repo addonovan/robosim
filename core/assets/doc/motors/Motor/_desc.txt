@@ -3,7 +3,7 @@ A motor on the robot baed on the AndyMark Neverest 40 motor.
 This motor is based off of the AndyMark Neverest 40 motor, which produces
 350 [ozf-in] (2.472 [Nm]) of torque at its max power. This simulation
 assumes that the motors are connected to 4 [in] (0.1016 [m]) diameter wheels,
-which yields an output force of 87.5 [ozf] (24.33 [N]).
+which yields an output force of 175 [ozf] (48.65 [N]).
 
 Power values applied to the motor scale the output force linearly (this is
 not technically correct; however, this isn't perfect yet).

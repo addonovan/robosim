@@ -103,7 +103,7 @@ public class Motor implements HardwareDevice
             angle -= Math.PI;
         }
 
-        Vector2 force = Math.vectorFrom( 24.33f * power, angle );
+        Vector2 force = Math.vectorFrom( 48.65f * power, angle );
 
         robot.getBody().applyForce( force, position, true );
     }
