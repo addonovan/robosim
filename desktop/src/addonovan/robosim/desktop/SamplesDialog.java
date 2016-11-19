@@ -149,12 +149,7 @@ public class SamplesDialog extends JDialog
             int descriptionEnd = text.indexOf( descriptionDelimiter );
 
             // the description is everything before the delimiter
-            description = text
-                    .substring( 0, descriptionEnd )       // only the part up to that
-                    .replace( "#", "" )                   // remove preceding #'s
-                    .replaceAll( "^ ", "" )               // remove leading spaces on each line
-                    .replaceAll( "(?<!\n)\n(?!\n)", "" )  // remove single \n's
-                    .trim();                              // remove any trailing or leading stuffs
+            description = StringUtils.trim( text.substring( 0, descriptionEnd ) );
 
             // the source is everything after the it
             source = text
