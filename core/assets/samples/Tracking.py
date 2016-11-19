@@ -27,7 +27,7 @@ def move(self, power):
 def loop(self):
     distance = self.sensor_distance.getDistance()
 
-    if distance == -1 or distance > 20:
+    if distance == -1 or distance > 125:
         self.move( 1 )
     else:
         self.rotate( 1 )

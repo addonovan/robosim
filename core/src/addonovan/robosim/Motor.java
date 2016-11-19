@@ -78,8 +78,8 @@ public class Motor implements HardwareDevice
             Vector2 start = Units.mToPx( getStartPosition() );
             Vector2 end = Units.mToPx( getEndPosition() );
 
-            sr.circle( start.x, start.y, 2 );
-            sr.rectLine( start, end, 2 );
+            sr.circle( start.x, start.y, 4 );
+            sr.rectLine( start, end, 3 );
 
         } );
     }
