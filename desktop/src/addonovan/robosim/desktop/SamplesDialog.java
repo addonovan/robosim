@@ -37,6 +37,8 @@ public class SamplesDialog extends JDialog
 
             // return the source of the sample
             onChoose.accept( sampleList.getSelectedValue().source );
+
+            dispose();
         } );
 
         buttonCancel.addActionListener( e -> onCancel() );
@@ -150,6 +152,7 @@ public class SamplesDialog extends JDialog
             description = text
                     .substring( 0, descriptionEnd )       // only the part up to that
                     .replace( "#", "" )                   // remove preceding #'s
+                    .replaceAll( "^ ", "" )               // remove leading spaces on each line
                     .replaceAll( "(?<!\n)\n(?!\n)", "" )  // remove single \n's
                     .trim();                              // remove any trailing or leading stuffs
 
