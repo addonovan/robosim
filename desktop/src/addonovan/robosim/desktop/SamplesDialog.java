@@ -84,7 +84,10 @@ public class SamplesDialog extends JDialog
 
         // update the list and add a listener to show the sample descriptions
         sampleList.setModel( listModel );
-        sampleList.addListSelectionListener( e -> descriptionArea.setText( sampleList.getSelectedValue().description ) );
+        sampleList.addListSelectionListener( e ->
+        {
+            descriptionArea.setText( sampleList.getSelectedValue().description );
+        } );
     }
 
     //
@@ -144,10 +147,16 @@ public class SamplesDialog extends JDialog
             int descriptionEnd = text.indexOf( descriptionDelimiter );
 
             // the description is everything before the delimiter
-            description = text.substring( 0, descriptionEnd ).replace( "#", "" ).trim();
+            description = text
+                    .substring( 0, descriptionEnd )       // only the part up to that
+                    .replace( "#", "" )                   // remove preceding #'s
+                    .replaceAll( "(?<!\n)\n(?!\n)", "" )  // remove single \n's
+                    .trim();                              // remove any trailing or leading stuffs
 
             // the source is everything after the it
-            source = text.substring( descriptionEnd + descriptionDelimiter.length(), text.length() ).trim();
+            source = text
+                    .substring( descriptionEnd + descriptionDelimiter.length() ) // only the following part after the previous
+                    .trim(); // remove any trailing or leading stuffs
         }
 
         //
