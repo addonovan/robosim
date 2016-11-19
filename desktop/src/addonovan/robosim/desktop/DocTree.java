@@ -1,5 +1,8 @@
 package addonovan.robosim.desktop;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -51,36 +54,51 @@ public class DocTree
      */
     public void buildTreeModel()
     {
-        DocTreeNode root = new DocTreeNode( "Documentation", "Documentation for everything", true );
+        actualTree.setModel( new DocTreeModel( buildNodeFor( Gdx.files.internal( "doc" ) ) ) );
+    }
 
-        DocTreeNode motors = root.addNode( "Motors", "The motors on the robot", true );
+    /**
+     * Builds the DocTreeNode for the given handle.
+     *
+     * This will also recursively build the nodes for any children elements
+     * if the handle represents a directory.
+     *
+     * @param handle
+     *          The file handle to build the node for.
+     * @return The new DocTreeNode, or null if the handle's name is "_desc.txt"
+     */
+    private DocTreeNode buildNodeFor( FileHandle handle )
+    {
+        if ( handle.name().equals( "_desc.txt" ) ) return null;
+
+        // build a folder
+        if ( handle.isDirectory() )
         {
-            motors.addNode( "self.mtr_fr", "Motor", "The front-right motor on the robot" );
-            motors.addNode( "self.mtr_fl", "Motor", "The front-left motor on the robot" );
-            motors.addNode( "self.mtr_br", "Motor", "The back-right motor on the robot" );
-            motors.addNode( "self.mtr_bl", "Motor", "The back-left motor on the robot" );
+            String name = handle.name();
+            String description = handle.child( "_desc.txt" ).readString();
 
-            DocTreeNode motor = motors.addNode( "Motor", "Representation of a motor on a robot.", true );
+            DocTreeNode node = new DocTreeNode( name, description, true );
+
+            // recursively create the child nodes
+            for ( FileHandle f : handle.list() )
             {
-                motor.addNode( "power", "float", "A value between [-1.0, 1.0] which tells the motor how fast to spin." );
+                DocTreeNode child = buildNodeFor( f );
+                if ( child != null )
+                {
+                    node.add( child );
+                }
             }
-        }
 
-        DocTreeNode sensors = root.addNode( "Sensors", "The sensors on the robot", true );
+            return node;
+        }
+        // build a single element
+        else
         {
-            sensors.addNode( "self.sensor_distance", "DistanceSensor", "The forward-facing distance sensor." );
-            DocTreeNode distanceSensor = sensors.addNode( "DistanceSensor", "Representation of the ModernRobotics distance sensor.", true );
-            {
-                distanceSensor.addNode(
-                        "getDistance()",
-                        "=> float",
-                        "Returns a number [0.0, 2.55] which represents how far away whatever directly in front of the robot is, in [m].",
-                        "Will return a -1.0 if the sensor's range is exceeded."
-                );
-            }
-        }
+            String name = handle.nameWithoutExtension();
+            String description = handle.readString();
 
-        actualTree.setModel( new DocTreeModel( root ) );
+            return new DocTreeNode( name, description, false );
+        }
     }
 
     //
