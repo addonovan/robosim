@@ -56,6 +56,9 @@ public class SimulationWindow implements WindowListener
     private JButton resetButton;
     private JLabel lblRuntime;
     private DocTree docTree; // this isn't actually an error, the IDE is just being wonky, I guess
+    private JButton openSampleButton;
+    private JButton openButton;
+    private JButton saveButton;
 
     //
     // Constructors
@@ -183,9 +186,11 @@ public class SimulationWindow implements WindowListener
 
         SwingUtilities.invokeLater( () ->
         {
+            SimulationWindow window = new SimulationWindow();
             JFrame frame = new JFrame( "Robot Simulator" );
-            frame.setContentPane( new SimulationWindow().rootPanel );
+            frame.setContentPane( window.rootPanel );
             frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+            frame.addWindowListener( window );
             frame.pack();
             frame.setVisible( true );
         } );
@@ -195,14 +200,13 @@ public class SimulationWindow implements WindowListener
     // WindowListener
     //
 
-    @Override
-    public void windowClosed( WindowEvent e )
+    @Override public void windowClosing( WindowEvent e )
     {
         Gdx.app.exit();
     }
 
+    @Override public void windowClosed( WindowEvent e ) {}
     @Override public void windowOpened( WindowEvent e ) {}
-    @Override public void windowClosing( WindowEvent e ) {}
     @Override public void windowIconified( WindowEvent e ) {}
     @Override public void windowDeiconified( WindowEvent e ) {}
     @Override public void windowActivated( WindowEvent e ) {}
