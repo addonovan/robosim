@@ -45,7 +45,7 @@
               <minorTickSpacing value="50"/>
               <paintLabels value="true"/>
               <paintTicks value="true"/>
-              <snapToTicks value="true"/>
+              <snapToTicks value="false"/>
               <value value="100"/>
             </properties>
           </component>
