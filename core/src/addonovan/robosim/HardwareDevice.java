@@ -28,10 +28,4 @@ package addonovan.robosim;
  */
 public interface HardwareDevice extends Renderable
 {
-
-    /**
-     * Updates the device.
-     */
-    void update();
-
 }

@@ -90,6 +90,13 @@ public class Robot extends Entity
     //
 
     @Override
+    public void update()
+    {
+        motors.forEach( HardwareDevice::update );
+        sensors.forEach( Sensor::update );
+    }
+
+    @Override
     public void render()
     {
         Simulation.renderShape( ShapeRenderer.ShapeType.Line, sr ->
@@ -110,10 +117,7 @@ public class Robot extends Entity
             sr.setColor( Color.GREEN );
         } );
 
-        motors.forEach( HardwareDevice::update );
         motors.forEach( HardwareDevice::render );
-
-        sensors.forEach( Sensor::update );
         sensors.forEach( Sensor::render );
     }
 

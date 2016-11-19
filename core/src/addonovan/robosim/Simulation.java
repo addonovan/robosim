@@ -150,6 +150,8 @@ public final class Simulation
             float deltaTime = 1 / 60f * runSpeed.getValue().floatValue();
 
             runtime.setValue( runtime.getValue() + deltaTime );
+            robot.update();
+            renderables.forEach( Renderable::update );
             try
             {
                 loop.__call__();

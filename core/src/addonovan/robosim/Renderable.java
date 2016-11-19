@@ -30,6 +30,11 @@ public interface Renderable
 {
 
     /**
+     * Updates the object
+     */
+    void update();
+
+    /**
      * Renders the object in the simulation.
      */
     void render();

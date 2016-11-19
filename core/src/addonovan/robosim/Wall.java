@@ -115,6 +115,12 @@ public class Wall extends Entity
     //
 
     @Override
+    public void update()
+    {
+
+    }
+
+    @Override
     public void render()
     {
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
