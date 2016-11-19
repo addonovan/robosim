@@ -67,7 +67,7 @@ public class SimulationWindow implements WindowListener
     public SimulationWindow()
     {
         setUpSimulationPanel();
-        setUpEditors();
+        setUpEditor();
         setUpCallbacks();
         setUpControls();
     }
@@ -118,11 +118,23 @@ public class SimulationWindow implements WindowListener
     /**
      * Sets up the script editor.
      */
-    private void setUpEditors()
+    private void setUpEditor()
     {
         PythonSyntaxKit.initKit();
         scriptEditor.setContentType( "text/python" );
         scriptEditor.setText( Simulation.EMPTY_PROGRAM );
+
+        openButton.addActionListener( e -> {
+            // TODO show the open file dialog and let the user open a file
+        } );
+
+        saveButton.addActionListener( e -> {
+            // TODO show the save file dialog and let the user save a file
+        } );
+
+        openSampleButton.addActionListener( e -> {
+            // TODO show a dialog that lets the user choose a sample to open
+        } );
     }
 
     /**
