@@ -179,6 +179,12 @@ public class SimulationWindow implements WindowListener
             Simulation.initialize();
         } );
 
+        restartButton.addActionListener( e ->
+        {
+            stopButton.doClick();
+            startButton.doClick();
+        } );
+
         sliderRunSpeed.addChangeListener( e -> Simulation.runSpeed.setValue( sliderRunSpeed.getValue() / 100.0 ) );
     }
 
