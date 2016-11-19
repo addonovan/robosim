@@ -19,6 +19,7 @@
  */
 package addonovan.robosim;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -52,7 +53,7 @@ public class DistanceSensor implements Sensor
     private final float angle;
 
     /** The distance currently being read by the sensor. */
-    private float distance;
+    private float distance = MAX_DISTANCE;
 
     //
     // Constructors
@@ -97,19 +98,17 @@ public class DistanceSensor implements Sensor
     {
         Simulation.renderShape( ShapeRenderer.ShapeType.Filled, sr ->
         {
-
-            float alpha = 0.15f;
-            if ( distance > 0.001f )
-            {
-                alpha = ( 0.7f ) * ( 1 - ( distance / MAX_DISTANCE ) ) + 0.3f;
-            }
-
             float localDistance = distance;
             if ( localDistance < 0f )
             {
                 localDistance = MAX_DISTANCE;
             }
 
+            float alpha = 0.15f;
+            if ( localDistance > 0.001f )
+            {
+                alpha = ( 0.7f ) * ( 1 - ( localDistance / MAX_DISTANCE ) ) + 0.3f;
+            }
 
             sr.setColor( new Color( 1, 1, 0, alpha ) );
             Vector2 start = getStartPosition();
