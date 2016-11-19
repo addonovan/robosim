@@ -38,7 +38,14 @@ public class DocTree
         actualTree.addTreeSelectionListener( e -> {
 
             DocTreeNode node = ( DocTreeNode ) actualTree.getLastSelectedPathComponent();
-            descriptionField.setText( node.getUserObject().description );
+            if ( node != null && node.getUserObject() != null && node.getUserObject().description != null )
+            {
+                descriptionField.setText( node.getUserObject().description );
+            }
+            else
+            {
+                descriptionField.setText( "" );
+            }
 
         } );
     }

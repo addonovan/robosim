@@ -1,7 +1,7 @@
 # Samples basic motor movement and distance sensor usage.
 #
 # The robot will move forward at a decreasing power, as a function
-# of how far away the robot is from the wall. Once it is 0.20 meters
+# of how far away the robot is from the wall. Once it is 20 centimeters
 # away from the wall, it will start to move backwards, until the
 # distance sensor is out of range, and the process will start over
 # again.
@@ -13,7 +13,7 @@ def move(self, power):
     if abs( power ) <= 0.1:
         if power > 0:
             power = 0.1
-        else:
+        elif power < 0:
             power = -0.1
 
     self.mtr_fl.power = power
@@ -24,14 +24,14 @@ def move(self, power):
 def loop(self):
     distance = self.sensor_distance.getDistance()
 
-    if distance < 0.20 and distance != -1:
+    if distance < 20 and distance != -1:
         self.edge = True
 
     if self.edge and distance == -1:
         self.edge = False
 
-    power = ( distance / 2.55 )
-    if power == -1 / 2.55:
+    power = ( distance / 255 )
+    if power < 0:
         power = 1
 
     if self.edge:
