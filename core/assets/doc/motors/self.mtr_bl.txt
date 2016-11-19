@@ -1,0 +1,3 @@
+Motor
+
+The motor attached on the back left corner of the robot.

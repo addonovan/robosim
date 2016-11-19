@@ -1,0 +1,4 @@
+=> float
+
+Returns the distance that the sensor reads, 0-2.55 [m], or -1 if the
+sensor's range was exceeded.

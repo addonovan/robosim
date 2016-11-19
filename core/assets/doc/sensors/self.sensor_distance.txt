@@ -1,0 +1,3 @@
+DistanceSensor
+
+The distance sensor attached to the front center of the robot.

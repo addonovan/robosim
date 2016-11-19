@@ -1,0 +1,5 @@
+float
+
+A floating point value between -1.0 and 1.0 (inclusively) that scales the
+output force of the motor. If this value exceeds the limits, an exception
+will be thrown.

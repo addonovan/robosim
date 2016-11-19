@@ -1,0 +1,1 @@
+All the sensors available for use and how to use them.

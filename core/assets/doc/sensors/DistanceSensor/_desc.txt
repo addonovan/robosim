@@ -1,0 +1,5 @@
+A distance sensor based on the Modern Robotics range sensor.
+
+The optical distance sensor can measure values from 0-2.55 [m] (0-100 [in])
+by using sound waves for distances >0.05 [m] and a light sensor for distances
+<=0.05 [m].
