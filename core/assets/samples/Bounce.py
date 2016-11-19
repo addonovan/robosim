@@ -15,6 +15,10 @@ def move(self, power):
             power = 0.1
         elif power < 0:
             power = -0.1
+    elif power > 1:
+        power = 1
+    elif power < -1:
+        power -1
 
     self.mtr_fl.power = power
     self.mtr_fr.power = power
@@ -30,7 +34,7 @@ def loop(self):
     if self.edge and distance == -1:
         self.edge = False
 
-    power = ( distance / 255 )
+    power = ( distance / 255.0 )
     if power < 0:
         power = 1
 
