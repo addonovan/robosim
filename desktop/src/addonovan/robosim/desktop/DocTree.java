@@ -6,7 +6,6 @@ import com.badlogic.gdx.files.FileHandle;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 
 /**
  * The tree which shows documentation for methods and the
@@ -42,7 +41,6 @@ public class DocTree
             descriptionField.setText( node.getUserObject().description );
 
         } );
-        buildTreeModel();
     }
 
     //
@@ -141,7 +139,7 @@ public class DocTree
 
 
             this.name = name;
-            this.description = description;
+            this.description = StringUtils.trim( description );
             this.isFolder = isFolder;
         }
 
@@ -165,49 +163,6 @@ public class DocTree
         public DocTreeNode( String name, String description, boolean isFolder )
         {
             super( new DocTreeItem( name, description, isFolder ) );
-        }
-
-        //
-        // Actions
-        //
-
-        /**
-         * Creates a new node with the given information.
-         *
-         * @param name
-         *          {@see DocTreeItem.name}
-         * @param description
-         *          {@see DocTreeItem.description}
-         * @param isFolder
-         *          {@see DocTreeItem.isFolder}
-         * @return The newly created node.
-         */
-        public DocTreeNode addNode( String name, String description, boolean isFolder )
-        {
-            DocTreeNode node = new DocTreeNode( name, description, isFolder );
-            add( node );
-            return node;
-        }
-
-        /**
-         * Creates a new node with the given information.
-         *
-         * @param name
-         *          {@see DocTreeItem.name}
-         * @param descriptions
-         *          The parts of the description, stitched together into one, delimited
-         *          with \n\n.
-         */
-        public void addNode( String name, String... descriptions )
-        {
-            String description = "";
-            for ( String s : descriptions )
-            {
-                description += s;
-                description += "\n\n";
-            }
-
-            addNode( name, description, false );
         }
 
         //

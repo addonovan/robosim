@@ -55,7 +55,7 @@ public class SimulationWindow implements WindowListener
     private JButton restartButton;
     private JButton resetButton;
     private JLabel lblRuntime;
-    private DocTree docTree; // this isn't actually an error, the IDE is just being wonky, I guess
+    private DocTree docTree;
     private JButton openSampleButton;
     private JButton openButton;
     private JButton saveButton;
@@ -137,6 +137,8 @@ public class SimulationWindow implements WindowListener
                 scriptEditor.setText( s );
             } );
         } );
+
+        docTree.buildTreeModel();
     }
 
     /**
