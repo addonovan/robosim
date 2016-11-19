@@ -1,6 +1,6 @@
 # Samples basic rotation and edge tracking
 #
-# The robot will move forward at 100% power until it is 20 cm away
+# The robot will move forward at 100% power until it is 125 cm away
 # from the wall, then it will rotate until the distance measurement
 # reads a value greater than 20, and the cycle will repeat.
 # </description>
