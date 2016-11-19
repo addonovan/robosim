@@ -11,11 +11,20 @@ import java.util.function.Consumer;
 
 public class SamplesDialog extends JDialog
 {
+
+    //
+    // Components
+    //
+
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JList< Sample > sampleList;
     private JTextArea descriptionArea;
+
+    //
+    // Constructors
+    //
 
     /**
      * Constructs a new SamplesDialog to display the samples available
@@ -27,6 +36,7 @@ public class SamplesDialog extends JDialog
     public SamplesDialog( Consumer< String > onChoose )
     {
         setContentPane( contentPane );
+        setTitle( "Samples" );
         setModal( true );
         getRootPane().setDefaultButton( buttonOK );
 
