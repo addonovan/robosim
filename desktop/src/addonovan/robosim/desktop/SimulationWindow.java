@@ -133,7 +133,9 @@ public class SimulationWindow implements WindowListener
         } );
 
         openSampleButton.addActionListener( e -> {
-            // TODO show a dialog that lets the user choose a sample to open
+            SamplesDialog.showDialog( rootPanel, s -> {
+                scriptEditor.setText( s );
+            } );
         } );
     }
 

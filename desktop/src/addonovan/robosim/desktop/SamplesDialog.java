@@ -32,7 +32,11 @@ public class SamplesDialog extends JDialog
 
         buttonOK.addActionListener( e ->
         {
-            onChoose.accept( "" );
+            // if the user hasn't chosen anything, what are we supposed to do?
+            if ( sampleList.getSelectedValue() == null ) return;
+
+            // return the source of the sample
+            onChoose.accept( sampleList.getSelectedValue().source );
         } );
 
         buttonCancel.addActionListener( e -> onCancel() );
@@ -133,15 +137,14 @@ public class SamplesDialog extends JDialog
         public Sample( FileHandle location )
         {
             name = location.nameWithoutExtension();
+            Gdx.app.log( "SamplesDialog", "Parsing sample: " + name );
 
             String text = location.readString();
-
             String descriptionDelimiter = "</description>";
-
-            int descriptionEnd = text.indexOf( descriptionDelimiter.length() );
+            int descriptionEnd = text.indexOf( descriptionDelimiter );
 
             // the description is everything before the delimiter
-            description = text.substring( 0, descriptionEnd ).replace( "# ", "" ).trim();
+            description = text.substring( 0, descriptionEnd ).replace( "#", "" ).trim();
 
             // the source is everything after the it
             source = text.substring( descriptionEnd + descriptionDelimiter.length(), text.length() ).trim();
