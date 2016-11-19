@@ -214,6 +214,7 @@ public class SimulationWindow implements WindowListener
             frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
             frame.addWindowListener( window );
             frame.pack();
+            frame.setLocationRelativeTo( null );
             frame.setVisible( true );
         } );
     }
