@@ -117,16 +117,6 @@ public final class Math
         return a < b ? a : b;
     }
 
-    /**
-     * @param a
-     *          A number.
-     * @return |a|
-     */
-    public static float abs( float a )
-    {
-        return a < 0 ? -a : a;
-    }
-
     //
     // Sqrt/Pow
     //
@@ -151,6 +141,53 @@ public final class Math
     public static float pow( float a, float b )
     {
         return ( float ) java.lang.Math.pow( a, b );
+    }
+
+    //
+    // Misc
+    //
+
+
+    /**
+     * @param a
+     *          A number.
+     * @return |a|
+     */
+    public static float abs( float a )
+    {
+        return a < 0 ? -a : a;
+    }
+
+    /**
+     * @param a
+     *          The number to round.
+     * @param decimalPlaces
+     *          The number of decimal places to round to.
+     * @return 'a' rounded to the specified number of decimal places.
+     *          BEWARE of floating point "precision"
+     */
+    public static float round( float a, int decimalPlaces )
+    {
+        if ( decimalPlaces < 0 ) throw new IllegalArgumentException( "decimalPlaces must be >=0" );
+
+        a *= pow( 10, decimalPlaces );
+
+        // if the 'ones' place is >=5, then add five, so it will get truncated down
+        // but rounded to the correct value
+        if ( a % 10 >= 5 ) a += 10;
+
+        return ( ( int ) a ) / pow( 10, decimalPlaces );
+    }
+
+    /**
+     *
+     * @param a
+     *          The number to round.
+     * @return The number rounded and as an int.
+     */
+    public static int round( float a )
+    {
+        return ( int ) round( a, 0 );
     }
 
     //

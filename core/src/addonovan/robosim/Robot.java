@@ -140,6 +140,8 @@ public class Robot extends Entity
         fixtureDef.restitution = 0.1f;
 
         body.createFixture( fixtureDef );
+        body.setLinearDamping( 21f );
+        body.setAngularDamping( 21f );
         shape.dispose();
 
         return body;

@@ -80,11 +80,12 @@ public class DistanceSensor implements Sensor
     //
 
     /**
-     * @return The distance [0, 2.55], or -1 if no distance was sensed.
+     * @return The distance [0, 255] [cm], or -1 if no distance was sensed.
      */
-    public float getDistance()
+    public int getDistance()
     {
-        return distance;
+        if ( distance < 0f ) return -1;
+        return Math.round( distance * 100 );
     }
 
     //
