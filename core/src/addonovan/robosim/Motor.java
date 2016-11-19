@@ -126,7 +126,9 @@ public class Motor implements HardwareDevice
         float angle = robot.getAngle();
         if ( power < 0 ) angle -= Math.PI;
 
-        return Math.vectorFrom( power * Robot.WIDTH_M * 0.4f, angle ).add( start.x, start.y );
+        float scale = Math.sqrt( Math.abs( power ) );
+
+        return Math.vectorFrom( scale * Robot.WIDTH_M * 0.4f, angle ).add( start.x, start.y );
     }
 
 }
