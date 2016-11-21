@@ -64,6 +64,12 @@ public class RobotSimulator extends ApplicationAdapter
         Gdx.app.log( "RobotSimulator", "Simulation initialized" );
 
         debugRenderer = new Box2DDebugRenderer();
+        debugRenderer.setDrawAABBs( true );
+        debugRenderer.setDrawBodies( true );
+        debugRenderer.setDrawContacts( true );
+        debugRenderer.setDrawInactiveBodies( true );
+        debugRenderer.setDrawJoints( true );
+        debugRenderer.setDrawVelocities( true );
 
         Gdx.gl.glEnable( GL11.GL_BLEND );
         Gdx.gl.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
