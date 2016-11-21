@@ -46,6 +46,9 @@ public class Motor implements HardwareDevice
     /** The power of this motor [-1f, 1f]*/
     public float power = 0.0f;
 
+    /** The name of this motor. */
+    public final String name;
+
     //
     // Constructors
     //
@@ -58,8 +61,9 @@ public class Motor implements HardwareDevice
      * @param y
      *          The position on the robot [px]
      */
-    public Motor( float x, float y )
+    public Motor( String name, float x, float y )
     {
+        this.name = name;
         robot = Simulation.robot;
         position = Units.pxToM( Math.vectorFromAngle( x, y, robot.getAngle() ) );
     }

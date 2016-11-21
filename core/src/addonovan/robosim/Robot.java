@@ -30,6 +30,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -175,6 +176,14 @@ public class Robot extends Entity
     }
 
     /**
+     * @return An unmodifiable copy of the list of motors on this robot.
+     */
+    public List< Motor > getMotors()
+    {
+        return Collections.unmodifiableList( motors );
+    }
+
+    /**
      * Adds a new sensor to this robot.
      *
      * @param sensor
@@ -185,6 +194,14 @@ public class Robot extends Entity
     {
         sensors.add( sensor );
         return sensor;
+    }
+
+    /**
+     * @return An unmodifiable copy of hte list of sensors on this robot.
+     */
+    public List< Sensor > getSensors()
+    {
+        return Collections.unmodifiableList( sensors );
     }
 
     //
