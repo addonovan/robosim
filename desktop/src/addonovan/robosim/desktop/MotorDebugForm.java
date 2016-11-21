@@ -69,7 +69,7 @@ public class MotorDebugForm
                     // attach a listener for power changes
                     motor.power.attach( power ->
                     {
-                        value.setText( String.format( "%+.3f%%", power * 100 ) );
+                        value.setText( String.format( "%+-7.3f", power * 100 ) );
 
                     } );
 
