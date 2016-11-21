@@ -69,6 +69,7 @@ public class MotorDebugForm
                     motor.power.attach( power ->
                     {
                         value.setText( String.format( "%.3f%%", power * 100 ) );
+
                     } );
 
                     rootPanel.add( label );
