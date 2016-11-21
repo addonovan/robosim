@@ -207,9 +207,11 @@
                 <properties/>
                 <border type="none" title="Motors"/>
                 <children>
-                  <nested-form id="caa75" form-file="addonovan/robosim/desktop/MotorDebugList.form">
+                  <nested-form id="6c137" form-file="addonovan/robosim/desktop/MotorDebugList.form">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <minimum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                   </nested-form>
                 </children>

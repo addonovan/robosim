@@ -225,7 +225,14 @@ public class SimulationWindow implements WindowListener
 
     @Override public void windowClosing( WindowEvent e )
     {
-        Gdx.app.exit();
+        try
+        {
+            Gdx.app.exit();
+        }
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override public void windowClosed( WindowEvent e ) {}

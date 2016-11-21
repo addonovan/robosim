@@ -6,11 +6,11 @@
 # </description>
 
 def rotate(self, power):
-    self.mtr_fr.power = power
-    self.mtr_br.power = power
+    self.mtr_fr.setPower( power )
+    self.mtr_br.setPower( power )
 
-    self.mtr_fl.power = -power
-    self.mtr_bl.power = -power
+    self.mtr_fl.setPower( -power )
+    self.mtr_bl.setPower( -power )
 
 def move(self, power):
     if abs( power ) <= 0.1:
@@ -19,10 +19,10 @@ def move(self, power):
         elif power < 0:
             power = -0.1
 
-    self.mtr_fl.power = power
-    self.mtr_fr.power = power
-    self.mtr_bl.power = power
-    self.mtr_br.power = power
+    self.mtr_fl.setPower( power )
+    self.mtr_fr.setPower( power )
+    self.mtr_bl.setPower( power )
+    self.mtr_br.setPower( power )
 
 def loop(self):
     distance = self.sensor_distance.getDistance()

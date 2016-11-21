@@ -5,6 +5,7 @@ import addonovan.robosim.Simulation;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author addonovan
@@ -18,7 +19,10 @@ public class MotorDebugList
     //
 
     private JPanel rootPanel;
-    private JPanel motorPanel;
+    private MotorForm frontLeft;
+    private MotorForm frontRight;
+    private MotorForm backLeft;
+    private MotorForm backRight;
 
     //
     // Fields
@@ -37,6 +41,11 @@ public class MotorDebugList
      */
     public MotorDebugList()
     {
+        motorForms.add( frontLeft );
+        motorForms.add( frontRight );
+        motorForms.add( backLeft );
+        motorForms.add( backRight );
+
         SwingUtilities.invokeLater( () ->
         {
             Simulation.running.attach( running -> init() );
@@ -49,30 +58,29 @@ public class MotorDebugList
 
     private void init()
     {
-        motorForms.clear();
-        motorPanel.removeAll();
+        List< Motor > motors = Simulation.robot.getMotors();
 
-        for ( Motor motor : Simulation.robot.getMotors() )
+        for ( Motor m : motors )
         {
-            MotorForm form = new MotorForm( motor );
-            motorForms.add( form );
-            motorPanel.add( form.rootPanel );
-        }
-
-        new Thread( () ->
-        {
-            while ( true )
+            switch ( m.name.toLowerCase() )
             {
-                motorForms.forEach( MotorForm::update );
+                case "mtr_fl":
+                    frontLeft.attachTo( m );
+                    break;
 
-                try
-                {
-                    Thread.sleep( 20 );
-                }
-                catch ( InterruptedException e ) {}
+                case "mtr_fr":
+                    frontRight.attachTo( m );
+                    break;
+
+                case "mtr_bl":
+                    backLeft.attachTo( m );
+                    break;
+
+                case "mtr_br":
+                    backRight.attachTo( m );
+                    break;
             }
-
-        } ).start();
+        }
     }
 
 }

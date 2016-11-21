@@ -43,11 +43,11 @@ public class Motor implements HardwareDevice
     /** The vector that points to the location of the motor [m].*/
     private final Vector2 position;
 
-    /** The power of this motor [-1f, 1f]*/
-    public float power = 0.0f;
-
     /** The name of this motor. */
     public final String name;
+
+    /** The power of this motor [-1f, 1f] */
+    public Observable< Double > power = new Observable<>( 0.0 );
 
     //
     // Constructors
@@ -91,6 +91,8 @@ public class Motor implements HardwareDevice
     @Override
     public void update()
     {
+        float power = getPower();
+
         if ( power < -1f ) power = -1f;
         if ( power > 1f ) power = 1f;
 
@@ -104,7 +106,6 @@ public class Motor implements HardwareDevice
         }
 
         Vector2 force = Math.vectorFrom( 48.65f * power, angle );
-
         robot.getBody().applyForce( force, position, true );
     }
 
@@ -125,6 +126,8 @@ public class Motor implements HardwareDevice
      */
     private Vector2 getEndPosition()
     {
+        float power = getPower();
+
         Vector2 start = getStartPosition();
 
         float angle = robot.getAngle();
@@ -133,6 +136,27 @@ public class Motor implements HardwareDevice
         float scale = Math.sqrt( Math.abs( power ) );
 
         return Math.vectorFrom( scale * Robot.WIDTH_M * 0.4f, angle ).add( start.x, start.y );
+    }
+
+    //
+    // Getters
+    //
+
+    /**
+     * @param f
+     *          The new power of the motor.
+     */
+    public void setPower( float f )
+    {
+        power.setValue( ( double ) f );
+    }
+
+    /**
+     * @return The power on the motor as a float.
+     */
+    public float getPower()
+    {
+        return power.getValue().floatValue();
     }
 
 }
