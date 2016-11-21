@@ -24,7 +24,7 @@ import addonovan.robosim.Motor;
 import addonovan.robosim.Simulation;
 
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -64,11 +64,12 @@ public class MotorDebugForm
                 {
                     JLabel label = new JLabel( motor.name );
                     JLabel value = new JLabel( "" );
+                    value.setFont( new Font( Font.MONOSPACED, value.getFont().getStyle(), value.getFont().getSize() ) );
 
                     // attach a listener for power changes
                     motor.power.attach( power ->
                     {
-                        value.setText( String.format( "%.3f%%", power * 100 ) );
+                        value.setText( String.format( "%+.3f%%", power * 100 ) );
 
                     } );
 
