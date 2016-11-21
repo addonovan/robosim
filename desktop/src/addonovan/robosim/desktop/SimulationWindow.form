@@ -192,7 +192,7 @@
             </children>
           </grid>
           <grid id="9e349" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+            <margin top="5" left="5" bottom="5" right="5"/>
             <constraints>
               <tabbedpane title="Hardware Information"/>
             </constraints>
@@ -200,18 +200,16 @@
             <border type="none"/>
             <children>
               <grid id="49c7e" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+                <margin top="5" left="5" bottom="5" right="5"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none" title="Motors"/>
                 <children>
-                  <nested-form id="6c137" form-file="addonovan/robosim/desktop/MotorDebugList.form">
+                  <nested-form id="791bf" form-file="addonovan/robosim/desktop/MotorDebugForm.form">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <minimum-size width="50" height="50"/>
-                      </grid>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </nested-form>
                 </children>
